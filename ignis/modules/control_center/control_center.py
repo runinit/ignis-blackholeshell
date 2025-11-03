@@ -7,6 +7,7 @@ from .widgets import (
     User,
     Media,
     NotificationCenter,
+    WallpaperControl,
 )
 from .menu import opened_menu
 
@@ -30,6 +31,7 @@ class ControlCenter(widgets.RevealerWindow):
                             Brightness(),
                             User(),
                             Media(),
+                            WallpaperControl(),
                         ],
                     ),
                     NotificationCenter(),

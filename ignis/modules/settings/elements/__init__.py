@@ -6,6 +6,7 @@ from .filerow import FileRow
 from .spinrow import SpinRow
 from .entryrow import EntryRow
 from .entry import SettingsEntry
+from .comboboxrow import ComboBoxRow
 
 __all__ = [
     "SettingsRow",
@@ -17,4 +18,5 @@ __all__ = [
     "SpinRow",
     "EntryRow",
     "SettingsEntry",
+    "ComboBoxRow",
 ]

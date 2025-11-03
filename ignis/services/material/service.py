@@ -110,11 +110,13 @@ class MaterialService(BaseService):
     async def __reload_gtk_theme(self) -> None:
         THEME_CMD = "gsettings set org.gnome.desktop.interface gtk-theme {}"
         COLOR_SCHEME_CMD = "gsettings set org.gnome.desktop.interface color-scheme {}"
+
+        # Set color scheme based on dark_mode
+        color_scheme = "prefer-dark" if user_options.material.dark_mode else "prefer-light"
+
         await utils.exec_sh_async(THEME_CMD.format("Adwaita"))
         await utils.exec_sh_async(THEME_CMD.format("Material"))
-        await utils.exec_sh_async(COLOR_SCHEME_CMD.format("default"))
-        await utils.exec_sh_async(COLOR_SCHEME_CMD.format("prefer-dark"))
-        await utils.exec_sh_async(COLOR_SCHEME_CMD.format("default"))
+        await utils.exec_sh_async(COLOR_SCHEME_CMD.format(color_scheme))
 
     async def __setup(self, image_path: str) -> None:
         try:

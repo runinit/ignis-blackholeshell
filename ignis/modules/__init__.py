@@ -5,6 +5,7 @@ from .notification_popup import NotificationPopup
 from .osd import OSD
 from .powermenu import Powermenu
 from .settings import Settings
+from .wallpaper_picker import WallpaperPicker
 
 __all__ = [
     "Bar",
@@ -14,4 +15,5 @@ __all__ = [
     "OSD",
     "Powermenu",
     "Settings",
+    "WallpaperPicker",
 ]

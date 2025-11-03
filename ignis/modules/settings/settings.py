@@ -4,6 +4,7 @@ from .active_page import active_page
 from .pages import (
     AboutEntry,
     AppearanceEntry,
+    BarEntry,
     NotificationsEntry,
     RecorderEntry,
     UserEntry,
@@ -33,9 +34,9 @@ class Settings(widgets.RegularWindow):
         )
 
         super().__init__(
-            default_width=900,
-            default_height=600,
-            resizable=False,
+            default_width=1200,
+            default_height=700,
+            resizable=True,
             hide_on_close=True,
             visible=False,
             child=widgets.Box(child=[navigation_sidebar, content]),
@@ -55,6 +56,7 @@ class Settings(widgets.RegularWindow):
             NotificationsEntry(),
             RecorderEntry(),
             AppearanceEntry(),
+            BarEntry(),
             UserEntry(),
             AboutEntry(),
         ]

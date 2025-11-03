@@ -1,0 +1,89 @@
+// Wallpaper Control Widget Styles
+
+.wallpaper-control {
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.wallpaper-control-thumbnail {
+  border-radius: 0.75rem;
+  background-color: $surfaceContainer;
+}
+
+.wallpaper-control-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  border-radius: 0 0 0.75rem 0.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.wallpaper-control-filename {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.wallpaper-control-progress {
+  min-height: 0.25rem;
+  margin-top: 0.25rem;
+
+  trough {
+    min-height: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 0.125rem;
+  }
+
+  highlight {
+    min-height: 0.25rem;
+    background-color: $primary;
+    border-radius: 0.125rem;
+  }
+
+  slider {
+    // Hide the slider handle for progress bar appearance
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    background-color: transparent;
+  }
+}
+
+.wallpaper-control-buttons {
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.wallpaper-control-button {
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  border-radius: 50%;
+  background-color: $surfaceContainerHigh;
+  color: $onSurface;
+  font-size: 1.2rem;
+  transition: all 200ms ease;
+
+  &:hover {
+    background-color: $surfaceContainerHighest;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.play-pause {
+    min-width: 3rem;
+    min-height: 3rem;
+    background-color: $primary;
+    color: $onPrimary;
+    font-size: 1.5rem;
+
+    &:hover {
+      background-color: $primaryContainer;
+    }
+  }
+
+  label {
+    padding: 0;
+    margin: 0;
+  }
+}
