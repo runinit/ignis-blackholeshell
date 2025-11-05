@@ -1,72 +1,72 @@
-// Palette key colors
-$primary_paletteKeyColor: {{ primary_paletteKeyColor }};
-$secondary_paletteKeyColor: {{ secondary_paletteKeyColor }};
-$tertiary_paletteKeyColor: {{ tertiary_paletteKeyColor }};
-$neutral_paletteKeyColor: {{ neutral_paletteKeyColor }};
-$neutral_variant_paletteKeyColor: {{ neutral_variant_paletteKeyColor }};
+// Palette key colors (using camelCase for consistency with matugen output)
+$primaryPaletteKeyColor: {{ primaryPaletteKeyColor }};
+$secondaryPaletteKeyColor: {{ secondaryPaletteKeyColor }};
+$tertiaryPaletteKeyColor: {{ tertiaryPaletteKeyColor }};
+$neutralPaletteKeyColor: {{ neutralPaletteKeyColor }};
+$neutralVariantPaletteKeyColor: {{ neutralVariantPaletteKeyColor }};
 
 // Surface colors
 $background: {{ background }};
-$onBackground: {{ on_background }};
+$onBackground: {{ onBackground }};
 $surface: {{ surface }};
-$surfaceDim: {{ surface_dim }};
-$surfaceBright: {{ surface_bright }};
-$surfaceContainerLowest: {{ surface_container_lowest }};
-$surfaceContainerLow: {{ surface_container_low }};
-$surfaceContainer: {{ surface_container }};
-$surfaceContainerHigh: {{ surface_container_high }};
-$surfaceContainerHighest: {{ surface_container_highest }};
-$onSurface: {{ on_surface }};
-$surfaceVariant: {{ surface_variant }};
-$onSurfaceVariant: {{ on_surface_variant }};
-$inverseSurface: {{ inverse_surface }};
-$inverseOnSurface: {{ inverse_on_surface }};
+$surfaceDim: {{ surfaceDim }};
+$surfaceBright: {{ surfaceBright }};
+$surfaceContainerLowest: {{ surfaceContainerLowest }};
+$surfaceContainerLow: {{ surfaceContainerLow }};
+$surfaceContainer: {{ surfaceContainer }};
+$surfaceContainerHigh: {{ surfaceContainerHigh }};
+$surfaceContainerHighest: {{ surfaceContainerHighest }};
+$onSurface: {{ onSurface }};
+$surfaceVariant: {{ surfaceVariant }};
+$onSurfaceVariant: {{ onSurfaceVariant }};
+$inverseSurface: {{ inverseSurface }};
+$inverseOnSurface: {{ inverseOnSurface }};
 
 // Outline colors
 $outline: {{ outline }};
-$outlineVariant: {{ outline_variant }};
+$outlineVariant: {{ outlineVariant }};
 
 // Shadow and scrim
 $shadow: {{ shadow }};
 $scrim: {{ scrim }};
-$surfaceTint: {{ surface_tint }};
+$surfaceTint: {{ surfaceTint }};
 
 // Primary colors
 $primary: {{ primary }};
-$onPrimary: {{ on_primary }};
-$primaryContainer: {{ primary_container }};
-$onPrimaryContainer: {{ on_primary_container }};
-$inversePrimary: {{ inverse_primary }};
-$primaryFixed: {{ primary_fixed }};
-$primaryFixedDim: {{ primary_fixed_dim }};
-$onPrimaryFixed: {{ on_primary_fixed }};
-$onPrimaryFixedVariant: {{ on_primary_fixed_variant }};
+$onPrimary: {{ onPrimary }};
+$primaryContainer: {{ primaryContainer }};
+$onPrimaryContainer: {{ onPrimaryContainer }};
+$inversePrimary: {{ inversePrimary }};
+$primaryFixed: {{ primaryFixed }};
+$primaryFixedDim: {{ primaryFixedDim }};
+$onPrimaryFixed: {{ onPrimaryFixed }};
+$onPrimaryFixedVariant: {{ onPrimaryFixedVariant }};
 
 // Secondary colors
 $secondary: {{ secondary }};
-$onSecondary: {{ on_secondary }};
-$secondaryContainer: {{ secondary_container }};
-$onSecondaryContainer: {{ on_secondary_container }};
-$secondaryFixed: {{ secondary_fixed }};
-$secondaryFixedDim: {{ secondary_fixed_dim }};
-$onSecondaryFixed: {{ on_secondary_fixed }};
-$onSecondaryFixedVariant: {{ on_secondary_fixed_variant }};
+$onSecondary: {{ onSecondary }};
+$secondaryContainer: {{ secondaryContainer }};
+$onSecondaryContainer: {{ onSecondaryContainer }};
+$secondaryFixed: {{ secondaryFixed }};
+$secondaryFixedDim: {{ secondaryFixedDim }};
+$onSecondaryFixed: {{ onSecondaryFixed }};
+$onSecondaryFixedVariant: {{ onSecondaryFixedVariant }};
 
 // Tertiary colors
 $tertiary: {{ tertiary }};
-$onTertiary: {{ on_tertiary }};
-$tertiaryContainer: {{ tertiary_container }};
-$onTertiaryContainer: {{ on_tertiary_container }};
-$tertiaryFixed: {{ tertiary_fixed }};
-$tertiaryFixedDim: {{ tertiary_fixed_dim }};
-$onTertiaryFixed: {{ on_tertiary_fixed }};
-$onTertiaryFixedVariant: {{ on_tertiary_fixed_variant }};
+$onTertiary: {{ onTertiary }};
+$tertiaryContainer: {{ tertiaryContainer }};
+$onTertiaryContainer: {{ onTertiaryContainer }};
+$tertiaryFixed: {{ tertiaryFixed }};
+$tertiaryFixedDim: {{ tertiaryFixedDim }};
+$onTertiaryFixed: {{ onTertiaryFixed }};
+$onTertiaryFixedVariant: {{ onTertiaryFixedVariant }};
 
 // Error colors
 $error: {{ error }};
-$onError: {{ on_error }};
-$errorContainer: {{ error_container }};
-$onErrorContainer: {{ on_error_container }};
+$onError: {{ onError }};
+$errorContainer: {{ errorContainer }};
+$onErrorContainer: {{ onErrorContainer }};
 
 // Dark mode flag
-$darkmode: {{ dark_mode }};
+$darkmode: {{ darkmode }};
