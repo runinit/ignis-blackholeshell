@@ -3,11 +3,21 @@ from ignis import utils
 from ignis.services.audio import AudioService
 from ..shared_widgets import MaterialVolumeSlider
 
-audio = AudioService.get_default()
+# Lazy initialization - don't initialize services at import time
+_audio = None
+
+
+def get_audio():
+    """Lazy load AudioService"""
+    global _audio
+    if _audio is None:
+        _audio = AudioService.get_default()
+    return _audio
 
 
 class OSD(widgets.Window):
     def __init__(self):
+        audio = get_audio()
         super().__init__(
             layer="overlay",
             anchor=["bottom"],

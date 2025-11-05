@@ -4,7 +4,16 @@ from ...menu import Menu
 from ....shared_widgets import ToggleBox
 from ignis.services.bluetooth import BluetoothService, BluetoothDevice
 
-bluetooth = BluetoothService.get_default()
+# Lazy initialization - don't initialize services at import time
+_bluetooth = None
+
+
+def get_bluetooth():
+    """Lazy load BluetoothService"""
+    global _bluetooth
+    if _bluetooth is None:
+        _bluetooth = BluetoothService.get_default()
+    return _bluetooth
 
 
 class BluetoothDeviceItem(widgets.Button):
@@ -37,6 +46,7 @@ class BluetoothDeviceItem(widgets.Button):
 
 class BluetoothMenu(Menu):
     def __init__(self):
+        bluetooth = get_bluetooth()
         super().__init__(
             name="bluetooth",
             child=[
@@ -59,6 +69,7 @@ class BluetoothMenu(Menu):
 
 class BluetoothButton(QSButton):
     def __init__(self):
+        bluetooth = get_bluetooth()
         menu = BluetoothMenu()
 
         def get_label(devices: list[BluetoothDevice]) -> str:
@@ -84,4 +95,5 @@ class BluetoothButton(QSButton):
 
 
 def bluetooth_control() -> list[QSButton]:
+    bluetooth = get_bluetooth()
     return [] if bluetooth.state == "absent" else [BluetoothButton()]

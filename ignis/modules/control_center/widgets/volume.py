@@ -6,7 +6,16 @@ from typing import Literal
 from ..menu import Menu
 from ...shared_widgets import MaterialVolumeSlider
 
-audio = AudioService.get_default()
+# Lazy initialization - don't initialize services at import time
+_audio = None
+
+
+def get_audio():
+    """Lazy load AudioService"""
+    global _audio
+    if _audio is None:
+        _audio = AudioService.get_default()
+    return _audio
 
 AUDIO_TYPES = {
     "speaker": {"menu_icon": "audio-headphones-symbolic", "menu_label": "Sound Output"},
@@ -19,6 +28,7 @@ AUDIO_TYPES = {
 
 class DeviceItem(widgets.Button):
     def __init__(self, stream: Stream, _type: Literal["speaker", "microphone"]):
+        audio = get_audio()
         super().__init__(
             child=widgets.Box(
                 child=[
@@ -47,6 +57,7 @@ class DeviceItem(widgets.Button):
 
 class DeviceMenu(Menu):
     def __init__(self, _type: Literal["speaker", "microphone"], style: str = ""):
+        audio = get_audio()
         data = AUDIO_TYPES[_type]
 
         super().__init__(
@@ -94,6 +105,7 @@ class DeviceMenu(Menu):
 
 class VolumeSlider(widgets.Box):
     def __init__(self, _type: Literal["speaker", "microphone"]):
+        audio = get_audio()
         stream = getattr(audio, _type)
 
         icon = widgets.Button(

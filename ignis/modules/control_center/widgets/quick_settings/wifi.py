@@ -6,7 +6,16 @@ from ...menu import Menu
 from ....shared_widgets import ToggleBox
 from ignis.services.network import NetworkService, WifiAccessPoint, WifiDevice
 
-network = NetworkService.get_default()
+# Lazy initialization - don't initialize services at import time
+_network = None
+
+
+def get_network():
+    """Lazy load NetworkService"""
+    global _network
+    if _network is None:
+        _network = NetworkService.get_default()
+    return _network
 
 
 class WifiNetworkItem(widgets.Button):
@@ -38,6 +47,7 @@ class WifiNetworkItem(widgets.Button):
 
 class WifiMenu(Menu):
     def __init__(self, device: WifiDevice):
+        network = get_network()
         super().__init__(
             name="wifi",
             child=[
@@ -75,6 +85,7 @@ class WifiMenu(Menu):
 
 class WifiButton(QSButton):
     def __init__(self, device: WifiDevice):
+        network = get_network()
         menu = WifiMenu(device)
 
         def get_label(ssid: str) -> str:
@@ -104,4 +115,5 @@ class WifiButton(QSButton):
 
 
 def wifi_control() -> list[QSButton]:
+    network = get_network()
     return [WifiButton(dev) for dev in network.wifi.devices]

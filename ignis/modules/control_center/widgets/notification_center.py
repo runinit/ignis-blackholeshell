@@ -4,7 +4,16 @@ from ignis import utils
 from gi.repository import GLib  # type: ignore
 from ...shared_widgets import NotificationWidget
 
-notifications = NotificationService.get_default()
+# Lazy initialization - don't initialize services at import time
+_notifications = None
+
+
+def get_notifications():
+    """Lazy load NotificationService"""
+    global _notifications
+    if _notifications is None:
+        _notifications = NotificationService.get_default()
+    return _notifications
 
 
 class Popup(widgets.Revealer):
@@ -23,6 +32,7 @@ class NotificationList(widgets.Box):
     __gtype_name__ = "NotificationList"
 
     def __init__(self):
+        notifications = get_notifications()
         loading_notifications_label = widgets.Label(
             label="Loading notifications...",
             valign="center",
@@ -52,6 +62,7 @@ class NotificationList(widgets.Box):
         notify.reveal_child = True
 
     def __load_notifications(self) -> list[widgets.Label | Popup]:
+        notifications = get_notifications()
         contents: list[widgets.Label | Popup] = []
         for i in notifications.notifications:
             GLib.idle_add(lambda i=i: contents.append(Popup(i, reveal_child=True)))
@@ -74,6 +85,7 @@ class NotificationCenter(widgets.Box):
     __gtype_name__ = "NotificationCenter"
 
     def __init__(self):
+        notifications = get_notifications()
         super().__init__(
             vertical=True,
             vexpand=True,

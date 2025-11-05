@@ -5,7 +5,16 @@ from ...qs_button import QSButton
 from ...menu import Menu
 from ignis.services.network import NetworkService, EthernetDevice
 
-network = NetworkService.get_default()
+# Lazy initialization - don't initialize services at import time
+_network = None
+
+
+def get_network():
+    """Lazy load NetworkService"""
+    global _network
+    if _network is None:
+        _network = NetworkService.get_default()
+    return _network
 
 
 class EthernetConnectionItem(widgets.Button):
@@ -42,6 +51,7 @@ class EthernetConnectionItem(widgets.Button):
 
 class EthernetMenu(Menu):
     def __init__(self):
+        network = get_network()
         super().__init__(
             name="ethernet",
             child=[
@@ -83,6 +93,7 @@ class EthernetMenu(Menu):
 
 class EthernetButton(QSButton):
     def __init__(self):
+        network = get_network()
         menu = EthernetMenu()
 
         super().__init__(
@@ -96,6 +107,7 @@ class EthernetButton(QSButton):
 
 
 def ethernet_control() -> list[QSButton]:
+    network = get_network()
     if len(network.ethernet.devices) > 0:
         return [EthernetButton()]
     else:

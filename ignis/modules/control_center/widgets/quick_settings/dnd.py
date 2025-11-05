@@ -2,7 +2,16 @@ from ...qs_button import QSButton
 from ignis.services.notifications import NotificationService
 from ignis.options import options
 
-notifications = NotificationService.get_default()
+# Lazy initialization - don't initialize services at import time
+_notifications = None
+
+
+def get_notifications():
+    """Lazy load NotificationService"""
+    global _notifications
+    if _notifications is None:
+        _notifications = NotificationService.get_default()
+    return _notifications
 
 
 class DNDButton(QSButton):

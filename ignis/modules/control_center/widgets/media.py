@@ -5,14 +5,39 @@ import asyncio
 from ignis import widgets
 from ignis.services.mpris import MprisService, MprisPlayer
 from ignis import utils
-from services.material import MaterialService
 from jinja2 import Template
 from ignis.css_manager import CssManager, CssInfoString
 
 
-mpris = MprisService.get_default()
-css_manager = CssManager.get_default()
-material = MaterialService.get_default()
+# Lazy initialization - don't initialize services at import time
+_mpris = None
+_css_manager = None
+_material_service = None
+
+
+def get_mpris():
+    """Lazy load MprisService"""
+    global _mpris
+    if _mpris is None:
+        _mpris = MprisService.get_default()
+    return _mpris
+
+
+def get_css_manager():
+    """Lazy load CssManager"""
+    global _css_manager
+    if _css_manager is None:
+        _css_manager = CssManager.get_default()
+    return _css_manager
+
+
+def get_material_service():
+    """Lazy load MaterialService"""
+    global _material_service
+    if _material_service is None:
+        from services.material import MaterialService
+        _material_service = MaterialService.get_default()
+    return _material_service
 
 MEDIA_TEMPLATE = utils.get_current_dir() + "/media.scss"
 MEDIA_SCSS_CACHE_DIR = ignis.CACHE_DIR + "/media"  # type: ignore
@@ -190,17 +215,17 @@ class Player(widgets.Revealer):
         else:
             art_url = self._player.art_url
 
-        colors = material.get_colors_from_img(art_url, True)
+        colors = get_material_service().get_colors_from_img(art_url, True)
         colors["art_url"] = art_url
         colors["desktop_entry"] = self.clean_desktop_entry()
 
         with open(MEDIA_TEMPLATE) as file:
             template_rendered = Template(file.read()).render(colors)
 
-        if self._player.desktop_entry in css_manager.list_css_info_names():
-            css_manager.remove_css(self._player.desktop_entry)
+        if self._player.desktop_entry in get_css_manager().list_css_info_names():
+            get_css_manager().remove_css(self._player.desktop_entry)
 
-        css_manager.apply_css(
+        get_css_manager().apply_css(
             CssInfoString(
                 name=self._player.desktop_entry,
                 compiler_function=lambda string: utils.sass_compile(string=string),
@@ -216,7 +241,7 @@ class Media(widgets.Box):
     def __init__(self):
         super().__init__(
             vertical=True,
-            setup=lambda self: mpris.connect(
+            setup=lambda self: get_mpris().connect(
                 "player_added", lambda x, player: self.__add_player(player)
             ),
             css_classes=["rec-unset"],

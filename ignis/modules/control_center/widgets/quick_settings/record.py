@@ -11,7 +11,16 @@ AUDIO_DEVICES = {
     "Both sources": "default_output|default_input",
 }
 
-recorder = RecorderService.get_default()
+# Lazy initialization - don't initialize services at import time
+_recorder = None
+
+
+def get_recorder():
+    """Lazy load RecorderService"""
+    global _recorder
+    if _recorder is None:
+        _recorder = RecorderService.get_default()
+    return _recorder
 
 
 class RecordMenu(Menu):
@@ -81,6 +90,7 @@ class RecordMenu(Menu):
         )
 
     async def __start_recording(self) -> None:
+        recorder = get_recorder()
         self.set_reveal_child(False)
 
         config = RecorderConfig.new_from_options()
@@ -96,6 +106,7 @@ class RecordMenu(Menu):
 
 class RecordButton(QSButton):
     def __init__(self):
+        recorder = get_recorder()
         record_menu = RecordMenu()
 
         super().__init__(

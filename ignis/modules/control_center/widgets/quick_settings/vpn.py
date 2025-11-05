@@ -5,8 +5,16 @@ from ...qs_button import QSButton
 from ...menu import Menu
 from ignis.services.network import NetworkService, VpnConnection
 
+# Lazy initialization - don't initialize services at import time
+_network = None
 
-network = NetworkService.get_default()
+
+def get_network():
+    """Lazy load NetworkService"""
+    global _network
+    if _network is None:
+        _network = NetworkService.get_default()
+    return _network
 
 
 class VpnNetworkItem(widgets.Button):
@@ -40,6 +48,7 @@ class VpnNetworkItem(widgets.Button):
 
 class VpnMenu(Menu):
     def __init__(self):
+        network = get_network()
         super().__init__(
             name="vpn",
             child=[
@@ -81,6 +90,7 @@ class VpnMenu(Menu):
 
 class VpnButton(QSButton):
     def __init__(self):
+        network = get_network()
         menu = VpnMenu()
 
         def get_label(id: str) -> str:
@@ -106,6 +116,7 @@ class VpnButton(QSButton):
 
 
 def vpn_control() -> list[QSButton]:
+    network = get_network()
     if len(network.vpn.connections) > 0:
         return [VpnButton()]
     else:
