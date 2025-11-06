@@ -4,17 +4,15 @@ window.ignis_SETTINGS {
     background-color: $surface;
 }
 
-// GNOME 48-style HeaderBar
+// GNOME 48-style HeaderBar with Material Design 3
 .settings-headerbar {
-    background: linear-gradient(to bottom,
-        rgba($surfaceContainerHigh, 0.95),
-        rgba($surfaceContainer, 0.90));
-    border-bottom: 1px solid rgba($outlineVariant, 0.3);
+    background: $surfaceContainer;
+    border-bottom: 1px solid $outlineVariant;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
-    padding: 6px 12px;
-    min-height: 40px;
-    box-shadow: 0 1px 3px rgba($shadow, 0.1);
+    padding: 8px 16px;
+    min-height: 48px;
+    box-shadow: none;
 
     windowtitle {
         font-size: 1.1rem;
@@ -23,71 +21,97 @@ window.ignis_SETTINGS {
     }
 }
 
+.settings-header-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: $onSurface;
+}
+
 .settings-sidebar {
-    background-color: $surfaceContainer;
-    min-width: 300px;
+    background-color: $surfaceContainerLow;
+    min-width: 280px;
+    border-right: 1px solid $outlineVariant;
 }
 
 .settings-sidebar-label {
-    font-size: 2rem;
-    margin-left: 1rem;
-    margin-bottom: 0.5rem;
-    margin-top: 2rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-left: 1.25rem;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    color: $onSurface;
 }
 
 .settings-sidebar-entry {
     all: unset;
-    background-color: $surfaceContainer;
-    padding: 1rem 2rem;
-    padding-left: 0.75rem;
-    font-size: 1.2rem;
+    background-color: transparent;
+    padding: 0.875rem 1.25rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin: 0.25rem 0.75rem;
+    transition: background-color 0.2s ease;
+    color: $onSurfaceVariant;
+
+    &:hover {
+        background-color: $surfaceContainerHighest;
+    }
 
     &:selected {
-        @if $darkmode == true {
-            background-color: lighten($surfaceContainer, 10%);
-        }
-        @else {
-            background-color: darken($surfaceContainer, 10%);
-        }
+        background-color: $secondaryContainer;
+        color: $onSecondaryContainer;
+        font-weight: 500;
     }
 }
 
 
 .settings-page-name {
-    font-size: 2rem;
-    margin-left: 2.5rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    color: $onSurface;
 }
 
 .settings-group-name {
-    margin-left: 2.5rem;
+    margin-left: 2rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: $primary;
 }
 
 .settings-row {
     all: unset;
-    padding: 0.7rem 2.5rem;
-    transition: 0.2s;
+    padding: 1rem 2rem;
+    transition: background-color 0.2s ease;
+    border-radius: 8px;
+    margin: 0.25rem 1rem;
+
+    &:hover {
+        background-color: $surfaceContainerHighest;
+    }
 
     &:active {
-        @if $darkmode == true {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-        @else {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
+        background-color: $surfaceContainerHigh;
     }
 }
 
 .settings-row-label {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $onSurface;
 }
 
 .settings-row-sublabel {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: normal;
     color: $onSurfaceVariant;
+    margin-top: 0.25rem;
 }
 
 .settings-user-name {

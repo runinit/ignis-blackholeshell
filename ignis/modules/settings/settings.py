@@ -34,9 +34,14 @@ class Settings(widgets.RegularWindow):
             ],
         )
 
-        # Create GNOME 48-style HeaderBar
+        # Create GNOME 48-style HeaderBar with title and window controls
         headerbar = widgets.HeaderBar(
             css_classes=["settings-headerbar"],
+            show_title_buttons=True,
+            title_widget=widgets.Label(
+                label="Settings",
+                css_classes=["settings-header-title"],
+            ),
         )
 
         super().__init__(
@@ -63,7 +68,7 @@ class Settings(widgets.RegularWindow):
             NotificationsEntry(),
             RecorderEntry(),
             AppearanceEntry(),
-            # MaterialEntry(),  # Temporarily disabled - debugging binding issue
+            MaterialEntry(),
             BarEntry(),
             UserEntry(),
             AboutEntry(),
