@@ -13,12 +13,16 @@ class EntryRow(SettingsRow):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self._entry = widgets.Entry(
-            on_change=on_change,
-            text=text,
-            halign="end",
-            valign="center",
-            width_request=width,
-            hexpand=True,
-        )
+        entry_kwargs = {
+            "on_change": on_change,
+            "text": text,
+            "halign": "end",
+            "valign": "center",
+            "hexpand": True,
+        }
+        # Only set width_request if width is provided (GTK expects int, not None)
+        if width is not None:
+            entry_kwargs["width_request"] = width
+
+        self._entry = widgets.Entry(**entry_kwargs)
         self.child.append(self._entry)
