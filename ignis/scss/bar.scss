@@ -1,6 +1,5 @@
 .bar-widget {
-    box-sizing: border-box;
-    height: $bar_height;
+    min-height: $bar_height;
     padding: $bar_padding_v $bar_padding_h;
     margin: $bar_margin_top $bar_margin_sides 0 $bar_margin_sides;
     border-radius: 0;

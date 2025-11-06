@@ -1,0 +1,46 @@
+# Ghostty terminal theme
+# Generated with matugen
+
+# Colors
+background = {{ surface }}
+foreground = {{ onSurface }}
+
+# Cursor
+cursor-color = {{ primary }}
+cursor-text = {{ onPrimary }}
+
+# Selection
+selection-background = {{ primaryContainer }}
+selection-foreground = {{ onPrimaryContainer }}
+
+# Black
+palette = 0={{ surfaceContainerLowest }}
+palette = 8={{ surfaceContainerHigh }}
+
+# Red
+palette = 1={{ error }}
+palette = 9={{ errorContainer }}
+
+# Green
+palette = 2={{ tertiary }}
+palette = 10={{ tertiaryContainer }}
+
+# Yellow
+palette = 3={{ secondary }}
+palette = 11={{ secondaryContainer }}
+
+# Blue
+palette = 4={{ primary }}
+palette = 12={{ primaryContainer }}
+
+# Magenta
+palette = 5={{ primary }}
+palette = 13={{ primaryContainer }}
+
+# Cyan
+palette = 6={{ tertiary }}
+palette = 14={{ tertiaryContainer }}
+
+# White
+palette = 7={{ onSurface }}
+palette = 15={{ onSurfaceVariant }}

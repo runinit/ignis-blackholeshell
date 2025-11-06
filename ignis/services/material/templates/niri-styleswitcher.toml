@@ -1,0 +1,11 @@
+# Niri window switcher theme
+# Generated with matugen
+
+[style]
+background_color = "{{ surface }}"
+text_color = "{{ onSurface }}"
+selection_color = "{{ primaryContainer }}"
+selection_text_color = "{{ onPrimaryContainer }}"
+border_color = "{{ outline }}"
+border_width = 2
+border_radius = 12

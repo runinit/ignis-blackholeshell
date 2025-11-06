@@ -5,6 +5,7 @@ from .pages import (
     AboutEntry,
     AppearanceEntry,
     BarEntry,
+    MaterialEntry,
     NotificationsEntry,
     RecorderEntry,
     UserEntry,
@@ -33,12 +34,18 @@ class Settings(widgets.RegularWindow):
             ],
         )
 
+        # Create GNOME 48-style HeaderBar
+        headerbar = widgets.HeaderBar(
+            css_classes=["settings-headerbar"],
+        )
+
         super().__init__(
             default_width=1200,
             default_height=700,
             resizable=True,
             hide_on_close=True,
             visible=False,
+            titlebar=headerbar,
             child=widgets.Box(child=[navigation_sidebar, content]),
             namespace="ignis_SETTINGS",
         )
@@ -56,6 +63,7 @@ class Settings(widgets.RegularWindow):
             NotificationsEntry(),
             RecorderEntry(),
             AppearanceEntry(),
+            # MaterialEntry(),  # Temporarily disabled - debugging binding issue
             BarEntry(),
             UserEntry(),
             AboutEntry(),

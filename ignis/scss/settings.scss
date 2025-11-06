@@ -1,3 +1,28 @@
+// GNOME 48-style window styling
+window.ignis_SETTINGS {
+    border-radius: 12px;
+    background-color: $surface;
+}
+
+// GNOME 48-style HeaderBar
+.settings-headerbar {
+    background: linear-gradient(to bottom,
+        rgba($surfaceContainerHigh, 0.95),
+        rgba($surfaceContainer, 0.90));
+    border-bottom: 1px solid rgba($outlineVariant, 0.3);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 6px 12px;
+    min-height: 40px;
+    box-shadow: 0 1px 3px rgba($shadow, 0.1);
+
+    windowtitle {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: $onSurface;
+    }
+}
+
 .settings-sidebar {
     background-color: $surfaceContainer;
     min-width: 300px;
