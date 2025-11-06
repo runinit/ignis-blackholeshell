@@ -42,8 +42,8 @@ class MaterialService(BaseService):
             "dark_mode", lambda: self.__on_dark_mode_changed()
         )
 
-        # Apply GTK theme and fonts on startup
-        asyncio.create_task(self.__reload_gtk_theme())
+        # Apply GTK theme and fonts on startup (defer until event loop is ready)
+        GLib.idle_add(lambda: asyncio.create_task(self.__reload_gtk_theme()) and False)
 
     def __load_colors_from_cache(self) -> None:
         """Load colors from cache - tries runtime cache first, then defaults"""
