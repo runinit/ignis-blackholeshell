@@ -1,13 +1,13 @@
 // GNOME 48-style window styling
 window.ignis_SETTINGS {
     border-radius: 12px;
-    background-color: $surface;
+    background-color: @theme_bg_color;
 }
 
 // GNOME 48-style HeaderBar with Material Design 3
 .settings-headerbar {
-    background: $surfaceContainer;
-    border-bottom: 1px solid $outlineVariant;
+    background: @headerbar_bg_color;
+    border-bottom: 1px solid alpha(@theme_fg_color, 0.15);
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     padding: 8px 16px;
@@ -17,20 +17,20 @@ window.ignis_SETTINGS {
     windowtitle {
         font-size: 1.1rem;
         font-weight: 600;
-        color: $onSurface;
+        color: @theme_fg_color;
     }
 }
 
 .settings-header-title {
     font-size: 1.15rem;
     font-weight: 600;
-    color: $onSurface;
+    color: @theme_fg_color;
 }
 
 .settings-sidebar {
-    background-color: $surfaceContainerLow;
+    background-color: @theme_base_color;
     min-width: 280px;
-    border-right: 1px solid $outlineVariant;
+    border-right: 1px solid alpha(@theme_fg_color, 0.15);
 }
 
 .settings-sidebar-label {
@@ -39,11 +39,11 @@ window.ignis_SETTINGS {
     margin-left: 1.25rem;
     margin-bottom: 1rem;
     margin-top: 1.5rem;
-    color: $onSurface;
+    color: @theme_fg_color;
 }
 
 .settings-content {
-    background-color: $surface;
+    background-color: @theme_bg_color;
     min-width: 400px;
 }
 
@@ -55,23 +55,23 @@ window.ignis_SETTINGS {
     border-radius: 8px;
     margin: 0.25rem 0.75rem;
     transition: background-color 0.2s ease;
-    color: $onSurfaceVariant;
+    color: alpha(@theme_fg_color, 0.7);
     border: none;
     box-shadow: none;
 
     &:hover {
-        background-color: $surfaceContainerHighest;
+        background-color: alpha(@theme_fg_color, 0.08);
     }
 
     &:selected {
-        background-color: $secondaryContainer;
-        color: $onSecondaryContainer;
+        background-color: @theme_selected_bg_color;
+        color: @theme_selected_fg_color;
         font-weight: 500;
     }
 }
 
 .settings-page {
-    background-color: $surface;
+    background-color: @theme_bg_color;
     min-width: 400px;
     min-height: 400px;
 }
@@ -86,7 +86,7 @@ window.ignis_SETTINGS {
     margin-left: 2rem;
     margin-bottom: 1.5rem;
     margin-top: 1.5rem;
-    color: $onSurface;
+    color: @theme_fg_color;
 }
 
 .settings-group-name {
@@ -97,7 +97,7 @@ window.ignis_SETTINGS {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: $primary;
+    color: @accent_color;
 }
 
 .settings-row {
@@ -110,24 +110,24 @@ window.ignis_SETTINGS {
     box-shadow: none;
 
     &:hover {
-        background-color: $surfaceContainerHighest;
+        background-color: alpha(@theme_fg_color, 0.08);
     }
 
     &:active {
-        background-color: $surfaceContainerHigh;
+        background-color: alpha(@theme_fg_color, 0.12);
     }
 }
 
 .settings-row-label {
     font-size: 1rem;
     font-weight: 500;
-    color: $onSurface;
+    color: @theme_fg_color;
 }
 
 .settings-row-sublabel {
     font-size: 0.875rem;
     font-weight: normal;
-    color: $onSurfaceVariant;
+    color: alpha(@theme_fg_color, 0.7);
     margin-top: 0.25rem;
 }
 
