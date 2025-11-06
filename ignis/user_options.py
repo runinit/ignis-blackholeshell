@@ -1,4 +1,5 @@
 import os
+import json
 from ignis.options_manager import OptionsGroup, OptionsManager
 from ignis import DATA_DIR, CACHE_DIR  # type: ignore
 
@@ -27,6 +28,17 @@ class UserOptions(OptionsManager):
         except FileNotFoundError:
             pass
 
+    def save_to_file(self, file: str) -> None:
+        """
+        Override to save ALL options including defaults, not just modified ones.
+
+        Bug fix: OptionsManager.get_modified_options() only returns explicitly set values,
+        causing default values to be lost on save/load cycles. Using to_dict() ensures
+        all options are persisted.
+        """
+        with open(file, "w") as fp:
+            json.dump(self.to_dict(), fp, indent=4)
+
     class User(OptionsGroup):
         avatar: str = f"/var/lib/AccountsService/icons/{os.getenv('USER')}"
 
@@ -36,6 +48,24 @@ class UserOptions(OptionsManager):
     class Material(OptionsGroup):
         dark_mode: bool = True
         colors: dict[str, str] = {}
+        # Matugen palette type: tonalspot, monochrome, rainbow, fruitSalad, expressive, neutral, vibrant, fidelity, content
+        palette_type: str = "tonalspot"
+        # Font configuration
+        interface_font: str = "Inter"
+        interface_font_size: int = 11
+        document_font: str = "Inter"
+        document_font_size: int = 11
+        monospace_font: str = "JetBrains Mono"
+        monospace_font_size: int = 10
+        # App theming toggles
+        theme_gtk: bool = True
+        theme_qt: bool = True
+        theme_kitty: bool = True
+        theme_ghostty: bool = True
+        theme_fuzzel: bool = True
+        theme_hyprland: bool = True
+        theme_niri: bool = True
+        theme_swaylock: bool = True
 
     class WallpaperSlideshow(OptionsGroup):
         folder_path: str = os.path.expanduser("~/Pictures")
