@@ -17,6 +17,7 @@ class Settings(widgets.RegularWindow):
         content = widgets.Box(
             hexpand=True,
             vexpand=True,
+            css_classes=["settings-content"],
             child=active_page.bind("value", transform=lambda value: [value]),
         )
         self._listbox = widgets.ListBox()

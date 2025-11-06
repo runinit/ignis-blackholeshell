@@ -42,6 +42,11 @@ window.ignis_SETTINGS {
     color: $onSurface;
 }
 
+.settings-content {
+    background-color: $surface;
+    min-width: 400px;
+}
+
 .settings-sidebar-entry {
     background-color: transparent;
     padding: 0.875rem 1.25rem;
@@ -67,6 +72,8 @@ window.ignis_SETTINGS {
 
 .settings-page {
     background-color: $surface;
+    min-width: 400px;
+    min-height: 400px;
 }
 
 .settings-group {
