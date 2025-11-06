@@ -43,7 +43,6 @@ window.ignis_SETTINGS {
 }
 
 .settings-sidebar-entry {
-    all: unset;
     background-color: transparent;
     padding: 0.875rem 1.25rem;
     padding-left: 1rem;
@@ -52,6 +51,8 @@ window.ignis_SETTINGS {
     margin: 0.25rem 0.75rem;
     transition: background-color 0.2s ease;
     color: $onSurfaceVariant;
+    border: none;
+    box-shadow: none;
 
     &:hover {
         background-color: $surfaceContainerHighest;
@@ -64,6 +65,13 @@ window.ignis_SETTINGS {
     }
 }
 
+.settings-page {
+    background-color: $surface;
+}
+
+.settings-group {
+    margin: 0.5rem 0;
+}
 
 .settings-page-name {
     font-size: 1.75rem;
@@ -86,11 +94,13 @@ window.ignis_SETTINGS {
 }
 
 .settings-row {
-    all: unset;
     padding: 1rem 2rem;
     transition: background-color 0.2s ease;
     border-radius: 8px;
     margin: 0.25rem 1rem;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
 
     &:hover {
         background-color: $surfaceContainerHighest;
