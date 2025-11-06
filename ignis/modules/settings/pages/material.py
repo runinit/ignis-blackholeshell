@@ -184,7 +184,11 @@ class MaterialEntry(SettingsEntry):
             ],
         )
 
-        super().__init__(page=page, label="Material You")
+        super().__init__(
+            page=page,
+            label="Material You",
+            icon="applications-graphics-symbolic",
+        )
 
     def _get_palette_index(self) -> int:
         """Get the index of the current palette type."""
