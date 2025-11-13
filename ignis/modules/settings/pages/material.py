@@ -15,12 +15,12 @@ material = MaterialService.get_default()
 
 class MaterialEntry(SettingsEntry):
     def __init__(self):
-        # Palette type mapping: value -> display label
+        # Palette type mapping: value -> display label (using matugen 3.0 format)
         self._palette_map = {
-            "tonalspot": "Tonal Spot (Balanced)",
+            "tonal-spot": "Tonal Spot (Balanced)",
             "monochrome": "Monochrome (Grayscale)",
             "rainbow": "Rainbow (Colorful)",
-            "fruitSalad": "Fruit Salad (Vibrant)",
+            "fruit-salad": "Fruit Salad (Vibrant)",
             "expressive": "Expressive (Bold)",
             "neutral": "Neutral (Subdued)",
             "vibrant": "Vibrant (Bright)",
@@ -45,7 +45,7 @@ class MaterialEntry(SettingsEntry):
                             sublabel="Algorithm for generating color palettes from wallpaper",
                             items=palette_labels,
                             selected=self._get_palette_index(),
-                            on_change=lambda x, index: user_options.material.set_palette_type(
+                            on_change=lambda x, index: user_options.material.set_matugen_scheme_type(
                                 self._palette_values[index]
                             ),
                         ),
@@ -192,8 +192,8 @@ class MaterialEntry(SettingsEntry):
 
     def _get_palette_index(self) -> int:
         """Get the index of the current palette type."""
-        current = user_options.material.palette_type
+        current = user_options.material.matugen_scheme_type
         try:
             return self._palette_values.index(current)
         except ValueError:
-            return 0  # Default to tonalspot
+            return 0  # Default to tonal-spot

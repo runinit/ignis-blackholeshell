@@ -80,24 +80,12 @@ class MaterialService(BaseService):
         try:
             # Run matugen to generate colors with user-selected palette type
             mode = "dark" if dark_mode else "light"
-            palette = user_options.material.palette_type
+            palette = user_options.material.matugen_scheme_type
 
-            # Convert palette type to matugen format (e.g., "tonalspot" -> "scheme-tonal-spot")
+            # Convert palette type to matugen format if needed
             # Matugen expects format: scheme-{type-with-hyphens}
             if not palette.startswith("scheme-"):
-                # Map all possible palette names to matugen format
-                palette_map = {
-                    "tonalspot": "scheme-tonal-spot",
-                    "fruitSalad": "scheme-fruit-salad",
-                    "monochrome": "scheme-monochrome",
-                    "rainbow": "scheme-rainbow",
-                    "expressive": "scheme-expressive",
-                    "neutral": "scheme-neutral",
-                    "vibrant": "scheme-vibrant",
-                    "fidelity": "scheme-fidelity",
-                    "content": "scheme-content",
-                }
-                palette = palette_map.get(palette, f"scheme-{palette}")  # Fallback to scheme-{value}
+                palette = f"scheme-{palette}"
 
             result = subprocess.run(
                 ["matugen", "image", path, "--json", "hex", "--mode", mode, "--type", palette, "--dry-run"],
