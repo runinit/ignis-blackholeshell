@@ -40,21 +40,53 @@ ignis-blackholeshell/
     └── PERFORMANCE_ANALYSIS.md
 ```
 
+## Current Development Focus: Noctalia Design Migration
+
+**Status:** Phase 1 - Foundation (In Progress)
+
+We are currently migrating to adopt Noctalia Shell's design language while maintaining our GTK4/Ignis implementation. This involves:
+
+1. **Design System** - Implementing "Blackhole Shell" design tokens based on Noctalia's spacing, typography, and layout principles
+2. **Color Schemes** - Replacing materialyoucolor with matugen 3.0, adding built-in palettes (Rose Pine default)
+3. **Adaptive Components** - Bar positioning (top/bottom/left/right), Dock module, panel system
+4. **Enhanced UX** - Capsule-style buttons, sub-panels, improved animations
+
+**Key Documents:**
+- `PHASE_1_FOUNDATION_PLAN.md` - Current phase detailed plan
+- `NOCTALIA_DESIGN_MIGRATION.md` - Overall migration strategy
+- `MATUGEN_MIGRATION_PLAN.md` - Original Material You → Matugen migration notes
+
+**Phase 1 Goals:**
+- ✅ Rose Pine as default theme (3 variants: main, moon, dawn)
+- 🔲 Built-in palette system with multiple color schemes
+- 🔲 Matugen 3.0 integration for wallpaper-based generation
+- 🔲 Settings panel with Color Scheme section
+- 🔲 Blackhole design token system (spacing, typography, radius, shadows)
+- 🔲 Matugen templates for external app theming
+- 🔲 Update codebase for latest Ignis git version
+
+See `PHASE_1_FOUNDATION_PLAN.md` for complete implementation details.
+
 ## Technology Stack
 
 ### Core Technologies
 - **Python 3.13+** - Primary language
 - **GTK4** - UI framework (via PyGObject)
-- **Ignis Framework** - Custom shell framework built on GTK4
+- **Ignis Framework (git latest)** - Custom shell framework built on GTK4
 - **SCSS/Sass** - Styling with dynamic variable injection
 - **GLib/Gio** - Async operations and system integration
 
 ### Key Dependencies
 - **PyGObject (gi)** - GTK4 Python bindings
-- **matugen** - Material You color palette generation (migrating to)
-- **materialyoucolor** - Current color generation library (being phased out)
+- **matugen 3.0** - Material Design color palette generation (replacing materialyoucolor)
 - **swww** - Wayland wallpaper daemon with transitions
 - **Hyprland/Niri** - Wayland compositor integration
+
+### Color System
+- **Built-in Palettes** - Rose Pine (default), Catppuccin, Nord, Gruvbox, Tokyo Night
+- **Dynamic Generation** - Matugen-based wallpaper color extraction
+- **Material Design 3** - Full M3 color token support
+- **External App Theming** - Matugen JSON templates for GTK, terminals, etc.
 
 ### Services & APIs
 - WallpaperService - Wallpaper management
@@ -612,25 +644,53 @@ cat /tmp/ignis_profile.log
 
 ## Project Status & Roadmap
 
-### Completed
+### Phase 1: Foundation (Current - Weeks 1-2)
+- 🔲 Rose Pine color scheme mapping (main, moon, dawn)
+- 🔲 Matugen 3.0 service implementation
+- 🔲 Color Scheme Manager service
+- 🔲 Built-in palette system (5+ themes)
+- 🔲 Blackhole design token system (SCSS)
+- 🔲 Settings panel - Color Scheme section
+- 🔲 Matugen templates for external apps
+- 🔲 Ignis breaking changes migration
+
+### Phase 2: Core Components (Weeks 3-4)
+- 🔲 Adaptive Bar (top/bottom/left/right positioning)
+- 🔲 Bar floating mode with margins
+- 🔲 Dock module with auto-hide and pinning
+- 🔲 App tracking and launching in Dock
+- 🔲 Apply Blackhole design tokens to all components
+
+### Phase 3: Panels (Weeks 5-6)
+- 🔲 Control Center redesign (capsule-style buttons)
+- 🔲 Calendar panel
+- 🔲 Audio panel (mixer)
+- 🔲 WiFi panel
+- 🔲 Bluetooth panel
+- 🔲 Panel navigation system
+
+### Phase 4: Polish (Week 7)
+- 🔲 OSD with circular progress indicators
+- 🔲 Global tooltip system
+- 🔲 Battery details panel
+- 🔲 Session Menu (rename from Powermenu)
+- 🔲 Refined animations
+- 🔲 Modal panel backdrop/scrim
+
+### Phase 5: Documentation (Week 8)
+- 🔲 Update all documentation
+- 🔲 User migration guide
+- 🔲 Component screenshots
+- 🔲 Video demo
+- 🔲 Release v1.0
+
+### Completed (Pre-Migration)
 - ✅ Core desktop shell modules (bar, launcher, control center, etc.)
-- ✅ Material You color theming with wallpaper integration
 - ✅ Wallpaper slideshow service with transitions
 - ✅ Performance optimization (5s startup, 46% in imports)
 - ✅ Multi-monitor support
 - ✅ Settings UI with persistent options
-
-### In Progress
-- ⏳ Migration from materialyoucolor to matugen (see MATUGEN_MIGRATION_PLAN.md)
-- ⏳ GTK4/Adwaita design alignment (GNOME 48 styling)
-- ⏳ Settings window HeaderBar implementation
-
-### Planned
-- 🔲 Additional quick settings toggles
-- 🔲 Widget customization UI
-- 🔲 Plugin system for custom modules
-- 🔲 Theme presets and sharing
-- 🔲 Automated testing suite
+- ✅ Noctalia design analysis and migration planning
 
 ## Contributing
 
