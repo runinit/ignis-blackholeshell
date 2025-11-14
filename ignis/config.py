@@ -6,7 +6,14 @@ venv_path = os.path.join(os.path.dirname(__file__), ".venv", "lib", "python3.13"
 if os.path.exists(venv_path):
     sys.path.insert(0, venv_path)
 
+# Enable widget parent debugging
+import debug_widget_parent
+
 from ignis import utils
+
+def debug_log(msg):
+    """Helper to log debug messages."""
+    print(f"[CONFIG] {msg}", file=sys.stderr)
 from ignis.services.wallpaper import WallpaperService
 from services.wallpaper_slideshow import WallpaperSlideshowService
 from modules import (
@@ -122,22 +129,47 @@ css_manager.apply_css(
 
 icon_manager.add_icons(os.path.join(utils.get_current_dir(), "icons"))
 
+debug_log("Creating ControlCenter...")
 ControlCenter()
+debug_log("ControlCenter created")
 
-for monitor in range(utils.get_n_monitors()):
+num_monitors = utils.get_n_monitors()
+debug_log(f"Number of monitors: {num_monitors}")
+
+for monitor in range(num_monitors):
+    debug_log(f"Creating Bar for monitor {monitor}...")
     Bar(monitor)
+    debug_log(f"Bar {monitor} created")
 
 # Initialize dock (Phase 2)
 if user_options.dock.enabled:
-    for monitor in range(utils.get_n_monitors()):
-        Dock(monitor)
+    debug_log(f"Dock enabled: {user_options.dock.enabled}, auto_hide: {user_options.dock.auto_hide}")
+    for monitor in range(num_monitors):
+        debug_log(f"Creating Dock for monitor {monitor}...")
+        try:
+            Dock(monitor)
+            debug_log(f"Dock {monitor} created")
+        except Exception as e:
+            debug_log(f"ERROR creating Dock {monitor}: {e}")
+            import traceback
+            traceback.print_exc()
+else:
+    debug_log("Dock disabled in user options")
 
-for monitor in range(utils.get_n_monitors()):
+for monitor in range(num_monitors):
+    debug_log(f"Creating NotificationPopup for monitor {monitor}...")
     NotificationPopup(monitor)
 
+debug_log("Creating Launcher...")
 Launcher()
+debug_log("Creating Powermenu...")
 Powermenu()
+debug_log("Creating OSD...")
 OSD()
 
+debug_log("Creating Settings...")
 Settings()
+debug_log("Creating WallpaperPicker...")
 WallpaperPicker()
+
+debug_log("All modules initialized successfully!")
