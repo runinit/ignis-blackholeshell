@@ -2,8 +2,8 @@
 // Using Blackhole design tokens for consistent styling
 
 .bar {
-    // Base styling
-    background: $surface-container;
+    // Base styling - using proper surface elevation (1dp)
+    background: $bar-surface;
     border-radius: $radius-m;
     transition: all $animation-normal ease;
 
@@ -13,7 +13,7 @@
             border-radius: $radius-l;
             box-shadow: $shadow-elevation-2;
             backdrop-filter: blur(10px);
-            background: rgba($surface-container, 0.95);
+            background: rgba($bar-surface, 0.95);
         }
         &:not(.floating) {
             border-top-left-radius: 0;
@@ -27,7 +27,7 @@
             border-radius: $radius-l;
             box-shadow: $shadow-elevation-2;
             backdrop-filter: blur(10px);
-            background: rgba($surface-container, 0.95);
+            background: rgba($bar-surface, 0.95);
         }
         &:not(.floating) {
             border-bottom-left-radius: 0;

@@ -2,7 +2,8 @@
 // Using Blackhole design tokens for Noctalia aesthetics
 
 .osd-window {
-    background: rgba($surface-container, 0.95);
+    // Using highest elevation for top-layer overlay (12dp elevation)
+    background: rgba($osd-surface, 0.95);
     backdrop-filter: blur(20px);
     border-radius: $radius-l;
     padding: $spacing-l;
@@ -58,12 +59,15 @@
     trough {
         min-height: 8px;
         border-radius: $radius-full;
-        background: $surface-container-high;
+        background: $surface-container-low;  // Darker trough for better contrast
     }
 
     block {
-        background: $primary;
+        // Gradient from primary to secondary for visual interest
+        background: linear-gradient(90deg, $primary, $secondary);
         border-radius: $radius-full;
+        // Subtle glow effect
+        box-shadow: 0 0 8px rgba($primary, 0.4);
     }
 
     // Smooth progress animation

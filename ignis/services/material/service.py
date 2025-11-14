@@ -105,37 +105,36 @@ class MaterialService(BaseService):
         except json.JSONDecodeError as e:
             raise RuntimeError(f"Failed to parse matugen output: {e}")
 
-    def _snake_to_camel(self, snake_str: str) -> str:
-        """Convert snake_case to camelCase"""
-        components = snake_str.split('_')
-        return components[0] + ''.join(x.title() for x in components[1:])
+    def _snake_to_kebab(self, snake_str: str) -> str:
+        """Convert snake_case to kebab-case for SCSS variables"""
+        return snake_str.replace('_', '-')
 
     def _flatten_matugen_colors(self, data: dict, dark_mode: bool) -> dict[str, str]:
-        """Flatten matugen JSON output to match template format - outputs camelCase keys for SCSS"""
+        """Flatten matugen JSON output to match template format - outputs kebab-case keys for SCSS"""
         colors = data.get("colors", {})
         palettes = data.get("palettes", {})
 
         # Get the mode key for nested colors
         mode = "dark" if dark_mode else "light"
 
-        # Flatten nested color structure with camelCase keys
+        # Flatten nested color structure with kebab-case keys
         flattened = {}
 
-        # Extract main colors and convert to camelCase
+        # Extract main colors and convert to kebab-case
         for color_name, color_data in colors.items():
-            camel_key = self._snake_to_camel(color_name)
+            kebab_key = self._snake_to_kebab(color_name)
             if isinstance(color_data, dict):
-                flattened[camel_key] = color_data.get(mode, color_data.get("default", "#000000"))
+                flattened[kebab_key] = color_data.get(mode, color_data.get("default", "#000000"))
             else:
-                flattened[camel_key] = color_data
+                flattened[kebab_key] = color_data
 
         # Add palette key colors (using tone 40 for light, 80 for dark)
         tone = 80 if dark_mode else 40
         for palette_name, palette_data in palettes.items():
             key_color = palette_data.get(str(tone), "#000000")
-            # Keep paletteKeyColor suffix as-is, convert the prefix to camelCase
-            camel_prefix = self._snake_to_camel(palette_name)
-            flattened[f"{camel_prefix}PaletteKeyColor"] = key_color
+            # Convert prefix to kebab-case and use kebab-case suffix
+            kebab_prefix = self._snake_to_kebab(palette_name)
+            flattened[f"{kebab_prefix}-palette-key-color"] = key_color
 
         # Add dark mode flag for SCSS
         flattened["darkmode"] = str(dark_mode).lower()

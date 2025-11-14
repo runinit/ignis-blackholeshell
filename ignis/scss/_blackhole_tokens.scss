@@ -199,6 +199,35 @@ $inverse-on-surface: #191724 !default;
 $inverse-primary: #6e6a86 !default;
 
 // ============================================================
+// SEMANTIC COLOR EXTENSIONS
+// ============================================================
+
+// Success colors (derived from tertiary - typically green tones in most schemes)
+$success: $tertiary !default;
+$on-success: $on-tertiary !default;
+$success-container: $tertiary-container !default;
+$on-success-container: $on-tertiary-container !default;
+
+// Warning colors (blend of error and primary for moderate severity)
+$warning: mix($error, $primary, 50%) !default;
+$on-warning: $on-error !default;
+$warning-container: mix($error-container, $primary-container, 50%) !default;
+$on-warning-container: $on-error-container !default;
+
+// Info colors (derived from primary)
+$info: $primary !default;
+$on-info: $on-primary !default;
+$info-container: $primary-container !default;
+$on-info-container: $on-primary-container !default;
+
+// Disabled state colors
+$disabled-color: rgba($on-surface, 0.38);
+$disabled-container-color: rgba($on-surface, 0.12);
+
+// Surface tint (for elevation, uses primary color)
+$surface-tint: $primary !default;
+
+// ============================================================
 // UTILITY MIXINS
 // ============================================================
 
@@ -221,10 +250,18 @@ $inverse-primary: #6e6a86 !default;
     transition: $property $animation-normal $ease-in-out-cubic;
 }
 
-// Focus ring
+// Focus ring (WCAG 2.2 compliant - 3px minimum)
 @mixin focus-ring {
-    outline: 2px solid $primary;
+    outline: 3px solid $primary;  // Increased from 2px for better visibility
     outline-offset: 2px;
+    border-radius: inherit;  // Match parent border radius
+}
+
+// Focus ring with custom color
+@mixin focus-ring-color($color: $primary) {
+    outline: 3px solid $color;
+    outline-offset: 2px;
+    border-radius: inherit;
 }
 
 // Text truncation

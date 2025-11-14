@@ -2,7 +2,8 @@
 // Using Blackhole design tokens for Noctalia aesthetics
 
 .control-center {
-    background: rgba($surface-container, 0.95);
+    // Using elevated surface for proper visual hierarchy (6dp elevation)
+    background: rgba($control-center-surface, 0.95);
     backdrop-filter: blur(20px);
     border-radius: $radius-l 0 0 $radius-l;
     padding: $spacing-m;

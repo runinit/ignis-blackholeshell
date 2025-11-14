@@ -2,8 +2,8 @@
 // Using Blackhole design tokens for consistent styling
 
 .dock {
-    // Base styling
-    background: $surface-container;
+    // Base styling - using proper surface elevation (1dp, same as bar)
+    background: $dock-surface;
     border-radius: $radius-l;
     padding: $spacing-s;
     box-shadow: $shadow-elevation-3;
@@ -111,11 +111,14 @@
     }
 
     .active-indicator {
-        height: 2px;
+        height: 3px;  // Slightly taller for better visibility
         width: 24px;
-        background: $primary;
-        border-radius: 2px;
+        // Gradient for premium feel
+        background: linear-gradient(90deg, $primary, $secondary);
+        border-radius: $radius-full;  // Fully rounded ends
         margin-top: $spacing-xxs;
         align-self: center;
+        // Subtle glow effect
+        box-shadow: 0 0 6px rgba($primary, 0.6);
     }
 }

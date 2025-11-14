@@ -1,12 +1,83 @@
-@mixin hover($bg) {
-    background-color: $bg;
+// Material Design 3 State Layers
+// Reference: https://m3.material.io/foundations/interaction/states/state-layers
 
-    &:hover {
-        @if $darkmode == true {
-            background-color: lighten($bg, 5%);
-        }
-        @else {
-            background-color: darken($bg, 5%);
+// State layer opacities (Material Design 3 spec)
+$state-hover-opacity: 0.08;
+$state-focus-opacity: 0.12;
+$state-pressed-opacity: 0.12;
+$state-dragged-opacity: 0.16;
+
+// Modern state layer mixin using overlay approach
+@mixin state-layers($color: $on-surface) {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        background-color: $color;
+        opacity: 0;
+        transition: opacity $animation-fast ease;
+        pointer-events: none;
+    }
+
+    &:hover::before {
+        opacity: $state-hover-opacity;
+    }
+
+    &:focus::before {
+        opacity: $state-focus-opacity;
+    }
+
+    &:active::before {
+        opacity: $state-pressed-opacity;
+    }
+}
+
+// Single state layer mixin
+@mixin state-layer($color, $state: 'hover') {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: inherit;
+        background-color: $color;
+        opacity: 0;
+        transition: opacity $animation-fast ease;
+        pointer-events: none;
+    }
+
+    @if $state == 'hover' {
+        &:hover::before {
+            opacity: $state-hover-opacity;
         }
     }
+
+    @if $state == 'focus' {
+        &:focus::before {
+            opacity: $state-focus-opacity;
+        }
+    }
+
+    @if $state == 'pressed' {
+        &:active::before {
+            opacity: $state-pressed-opacity;
+        }
+    }
+}
+
+// Legacy hover mixin (for backwards compatibility)
+// Deprecated: Use @include state-layers($on-surface) instead
+@mixin hover($bg) {
+    background-color: $bg;
+    @include state-layer($on-surface, 'hover');
 }

@@ -1,0 +1,51 @@
+// Material Design 3 Elevation Levels
+// Reference: https://m3.material.io/styles/elevation/overview
+//
+// Surface elevation creates visual hierarchy through subtle color changes.
+// Lower elevations are closer to the background, higher elevations float above.
+
+// Component-specific surface assignments
+// These variables map each component to the appropriate Material Design 3 surface level
+
+// Level 1 (1dp elevation) - Base surfaces that sit slightly above the background
+$bar-surface: $surface-container-low;
+$dock-surface: $surface-container-low;
+
+// Level 2 (3dp elevation) - Default cards and panels
+$panel-surface: $surface-container;
+$card-surface: $surface-container;
+
+// Level 3 (6dp elevation) - Elevated panels and side sheets
+$control-center-surface: $surface-container-high;
+$notification-surface: $surface-container-high;
+$drawer-surface: $surface-container-high;
+
+// Level 4 (12dp elevation) - Top-layer overlays and dialogs
+$osd-surface: $surface-container-highest;
+$dialog-surface: $surface-container-highest;
+$modal-surface: $surface-container-highest;
+
+// Surface tint for elevation (optional)
+// Material Design 3 uses subtle tints to indicate elevation
+$surface-tint: $primary !default;
+
+// Surface tint mixing function
+// Mixes surface with tint color based on elevation level
+@function get-tinted-surface($level) {
+    @if $level == 1 {
+        @return mix($surface, $surface-tint, 95%);  // 5% tint
+    } @else if $level == 2 {
+        @return mix($surface, $surface-tint, 92%);  // 8% tint
+    } @else if $level == 3 {
+        @return mix($surface, $surface-tint, 89%);  // 11% tint
+    } @else if $level == 4 {
+        @return mix($surface, $surface-tint, 86%);  // 14% tint
+    } @else {
+        @return $surface;
+    }
+}
+
+// Surface tint mixin for applying tinted elevation
+@mixin surface-tint($level) {
+    background: get-tinted-surface($level);
+}
