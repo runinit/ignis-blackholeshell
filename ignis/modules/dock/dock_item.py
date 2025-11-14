@@ -49,7 +49,6 @@ class DockItem(widgets.Button):
                         css_classes=["active-indicator"],
                         visible=running,
                     ),
-                    self._menu,
                 ],
             ),
         )
