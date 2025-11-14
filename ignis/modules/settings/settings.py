@@ -22,7 +22,9 @@ class Settings(widgets.RegularWindow):
         self._listbox = widgets.ListBox()
 
         # Manually handle active_page changes to avoid widget re-parenting issues
-        active_page.subscribe(lambda value: self._update_content(value))
+        active_page.connect("notify::value", lambda obj, param: self._update_content(obj.value))
+        # Set initial content
+        self._update_content(active_page.value)
 
         navigation_sidebar = widgets.Box(
             vertical=True,
