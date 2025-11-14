@@ -14,7 +14,7 @@ from ..panel_manager import get_panel_manager
 audio = AudioService.get_default()
 
 
-class DeviceRow(widgets.Box):
+class DeviceRow(widgets.Button):
     """A single audio device row with icon, name, and selection indicator."""
 
     def __init__(self, stream: Stream):
@@ -23,35 +23,35 @@ class DeviceRow(widgets.Box):
 
         super().__init__(
             css_classes=["audio-device-row"],
-            child=[
-                widgets.Icon(
-                    image=stream.bind("icon_name") if hasattr(stream, "icon_name") else "audio-card-symbolic",
-                    pixel_size=24,
-                ),
-                widgets.Box(
-                    orientation="vertical",
-                    hexpand=True,
-                    child=[
-                        widgets.Label(
-                            label=stream.bind("description") if hasattr(stream, "description") else stream.name,
-                            css_classes=["audio-device-name"],
-                            halign="start",
-                        ),
-                        widgets.Label(
-                            label=self._get_device_info(),
-                            css_classes=["audio-device-info"],
-                            halign="start",
-                        ),
-                    ],
-                ),
-                widgets.Icon(
-                    image="object-select-symbolic",
-                    visible=is_default,
-                    css_classes=["audio-device-selected"],
-                ),
-            ],
-            setup=lambda self: self.connect(
-                "button-press-event", lambda *_: stream.set_default()
+            on_click=lambda x: stream.set_default(),
+            child=widgets.Box(
+                child=[
+                    widgets.Icon(
+                        image=stream.bind("icon_name") if hasattr(stream, "icon_name") else "audio-card-symbolic",
+                        pixel_size=24,
+                    ),
+                    widgets.Box(
+                        orientation="vertical",
+                        hexpand=True,
+                        child=[
+                            widgets.Label(
+                                label=stream.bind("description") if hasattr(stream, "description") else stream.name,
+                                css_classes=["audio-device-name"],
+                                halign="start",
+                            ),
+                            widgets.Label(
+                                label=self._get_device_info(),
+                                css_classes=["audio-device-info"],
+                                halign="start",
+                            ),
+                        ],
+                    ),
+                    widgets.Icon(
+                        image="object-select-symbolic",
+                        visible=is_default,
+                        css_classes=["audio-device-selected"],
+                    ),
+                ],
             ),
         )
 
