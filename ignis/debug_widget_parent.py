@@ -37,7 +37,8 @@ def debug_append(self, child):
 Gtk.Box.append = debug_append
 
 # Track module initialization
-original_import = __builtins__.__import__
+import builtins
+original_import = builtins.__import__
 
 def debug_import(name, *args, **kwargs):
     result = original_import(name, *args, **kwargs)
@@ -45,7 +46,7 @@ def debug_import(name, *args, **kwargs):
         print(f"[INIT] Importing: {name}", file=sys.stderr)
     return result
 
-__builtins__.__import__ = debug_import
+builtins.__import__ = debug_import
 
 print("Widget parent debugging enabled", file=sys.stderr)
 print("Module import tracking enabled", file=sys.stderr)
