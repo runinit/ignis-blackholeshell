@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 # Add venv to path for dependencies like materialyoucolor
 venv_path = os.path.join(os.path.dirname(__file__), ".venv", "lib", "python3.13", "site-packages")
@@ -35,12 +36,23 @@ icon_manager = IconManager.get_default()
 css_manager = CssManager.get_default()
 WallpaperService.get_default()
 
-# Initialize swww daemon for wallpaper transitions
+# Initialize swww daemon for wallpaper transitions (non-blocking)
 # Check if already running before starting
 try:
-    utils.exec_sh("pgrep -x swww-daemon > /dev/null || swww-daemon &")
-except:
-    pass  # Ignore errors, daemon might already be running
+    # Check if daemon is running (non-blocking check)
+    result = subprocess.run(["pgrep", "-x", "swww-daemon"],
+                          capture_output=True, timeout=1)
+    if result.returncode != 0:  # Not running, start it
+        debug_log("Starting swww-daemon...")
+        # Start daemon without blocking (Popen doesn't wait)
+        subprocess.Popen(["swww-daemon"],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        start_new_session=True)
+        debug_log("swww-daemon started in background")
+except Exception as e:
+    debug_log(f"swww-daemon check/start skipped: {e}")
+    pass  # Ignore errors, daemon might already be running or not needed
 
 # Initialize wallpaper slideshow service
 wallpaper_slideshow = WallpaperSlideshowService.get_default()
