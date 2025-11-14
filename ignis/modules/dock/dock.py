@@ -99,13 +99,14 @@ class Dock(widgets.Window):
 
     def _find_app(self, app_id: str) -> ApplicationsService | None:
         """Find an application by ID or name."""
-        # Try exact match first
-        app = apps_service.get_app(app_id)
-        if app:
-            return app
-
-        # Try case-insensitive name search
         all_apps = apps_service.apps
+
+        # Try exact desktop file match first
+        for app in all_apps:
+            if app.desktop_file and app.desktop_file == app_id:
+                return app
+
+        # Try case-insensitive name match
         for app in all_apps:
             if app.name and app.name.lower() == app_id.lower():
                 return app

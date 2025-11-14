@@ -15,7 +15,7 @@
 
         // Auto-hide animations for bottom position
         &.hidden {
-            transform: translateY(100%);
+            transform: translateY(200px);
             opacity: 0;
         }
 
@@ -25,7 +25,7 @@
         }
 
         &.hiding {
-            transform: translateY(100%);
+            transform: translateY(200px);
             opacity: 0;
         }
     }
@@ -36,7 +36,7 @@
 
         // Auto-hide animations for left position
         &.hidden {
-            transform: translateX(-100%);
+            transform: translateX(-200px);
             opacity: 0;
         }
 
@@ -46,7 +46,7 @@
         }
 
         &.hiding {
-            transform: translateX(-100%);
+            transform: translateX(-200px);
             opacity: 0;
         }
     }
@@ -57,7 +57,7 @@
 
         // Auto-hide animations for right position
         &.hidden {
-            transform: translateX(100%);
+            transform: translateX(200px);
             opacity: 0;
         }
 
@@ -67,7 +67,7 @@
         }
 
         &.hiding {
-            transform: translateX(100%);
+            transform: translateX(200px);
             opacity: 0;
         }
     }
