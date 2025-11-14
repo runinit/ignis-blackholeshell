@@ -32,11 +32,12 @@ class VolumeOSD(OSDWindow):
             css_classes=["osd-icon"],
         )
 
-        self._progress = widgets.LevelBar(
-            min_value=0,
-            max_value=100,
+        self._progress = widgets.Scale(
+            min=0,
+            max=100,
             value=self._get_volume_value(),
             css_classes=["osd-progress"],
+            sensitive=False,  # Make read-only for display
         )
 
         self._label = widgets.Label(
@@ -59,7 +60,7 @@ class VolumeOSD(OSDWindow):
         # Connect to audio service signals
         if self._audio.speaker:
             self._audio.speaker.connect("notify::volume", lambda *_: self._on_volume_changed())
-            self._audio.speaker.connect("notify::muted", lambda *_: self._on_mute_changed())
+            self._audio.speaker.connect("notify::is-muted", lambda *_: self._on_mute_changed())
 
     def _get_volume_value(self) -> float:
         """Get current volume as percentage (0-100)."""
@@ -72,7 +73,7 @@ class VolumeOSD(OSDWindow):
         if not self._audio.speaker:
             return "audio-volume-muted-symbolic"
 
-        if self._audio.speaker.muted:
+        if self._audio.speaker.is_muted:
             return "audio-volume-muted-symbolic"
 
         volume = self._audio.speaker.volume
@@ -90,7 +91,7 @@ class VolumeOSD(OSDWindow):
         if not self._audio.speaker:
             return "0%"
 
-        if self._audio.speaker.muted:
+        if self._audio.speaker.is_muted:
             return "Muted"
 
         return f"{int(self._audio.speaker.volume * 100)}%"

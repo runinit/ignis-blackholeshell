@@ -3,7 +3,6 @@
 
 .osd-window {
     background: rgba($surface-container, 0.95);
-    backdrop-filter: blur(20px);
     border-radius: $radius-l;
     padding: $spacing-l;
     box-shadow: $shadow-elevation-4;
@@ -42,7 +41,7 @@
 
 .osd-container {
     min-width: 300px;
-    align-items: center;
+    // Note: alignment handled by GTK Box 'halign' property
 }
 
 .osd-icon {
