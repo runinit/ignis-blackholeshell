@@ -32,11 +32,12 @@ class VolumeOSD(OSDWindow):
             css_classes=["osd-icon"],
         )
 
-        self._progress = widgets.LevelBar(
-            min_value=0,
-            max_value=100,
+        self._progress = widgets.Scale(
+            min=0,
+            max=100,
             value=self._get_volume_value(),
             css_classes=["osd-progress"],
+            sensitive=False,  # Make read-only for display
         )
 
         self._label = widgets.Label(
