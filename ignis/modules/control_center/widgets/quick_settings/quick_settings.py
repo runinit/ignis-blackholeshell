@@ -15,6 +15,7 @@ network = NetworkService.get_default()
 class QuickSettings(widgets.Box):
     def __init__(self):
         super().__init__(vertical=True, css_classes=["qs-main-box"])
+        self._refreshing = False
         network.wifi.connect("notify::devices", lambda x, y: self.__refresh())
         network.ethernet.connect("notify::devices", lambda x, y: self.__refresh())
         network.vpn.connect("notify::connections", lambda x, y: self.__refresh())
@@ -22,8 +23,15 @@ class QuickSettings(widgets.Box):
         self.__refresh()
 
     def __refresh(self) -> None:
-        self.child = []
-        self.__configure()
+        # Prevent concurrent refreshes that could cause widget re-parenting issues
+        if self._refreshing:
+            return
+        self._refreshing = True
+        try:
+            self.child = []
+            self.__configure()
+        finally:
+            self._refreshing = False
 
     def __configure(self) -> None:
         self.__qs_fabric(

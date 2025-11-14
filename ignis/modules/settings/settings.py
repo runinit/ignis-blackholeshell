@@ -14,13 +14,15 @@ from .pages import (
 
 class Settings(widgets.RegularWindow):
     def __init__(self) -> None:
-        content = widgets.Box(
+        self._content = widgets.Box(
             hexpand=True,
             vexpand=True,
             css_classes=["settings-content"],
-            child=active_page.bind("value", transform=lambda value: [value]),
         )
         self._listbox = widgets.ListBox()
+
+        # Manually handle active_page changes to avoid widget re-parenting issues
+        active_page.subscribe(lambda value: self._update_content(value))
 
         navigation_sidebar = widgets.Box(
             vertical=True,
@@ -52,11 +54,19 @@ class Settings(widgets.RegularWindow):
             hide_on_close=True,
             visible=False,
             titlebar=headerbar,
-            child=widgets.Box(child=[navigation_sidebar, content]),
+            child=widgets.Box(child=[navigation_sidebar, self._content]),
             namespace="ignis_SETTINGS",
         )
 
         self.connect("notify::visible", self.__on_open)
+
+    def _update_content(self, page) -> None:
+        """Update the content area with the new page, ensuring proper widget parenting."""
+        # Clear existing children to properly unparent any previous widgets
+        self._content.child = []
+        # Add the new page
+        if page:
+            self._content.child = [page]
 
     def __on_open(self, *args) -> None:
         if self.visible is False:
