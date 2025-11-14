@@ -3,16 +3,14 @@
 
 .control-center {
     background: rgba($surface-container, 0.95);
-    backdrop-filter: blur(20px);
     border-radius: $radius-l 0 0 $radius-l;
     padding: $spacing-m;
     box-shadow: $shadow-elevation-4;
     min-width: 400px;
-    max-width: 400px;
 }
 
 .control-center-container {
-    gap: $spacing-m;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 .control-center-header {
@@ -20,7 +18,7 @@
 }
 
 .control-center-quick-settings {
-    gap: $spacing-s;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 // Panel Navigation System (Phase 3, Task 2)
@@ -46,9 +44,7 @@
 .panel-header {
     padding: $spacing-s $spacing-m;
     margin-bottom: $spacing-m;
-    display: flex;
-    align-items: center;
-    gap: $spacing-s;
+    // Note: layout handled by GTK Box widget properties
 }
 
 .panel-back-button {
@@ -60,9 +56,7 @@
     min-height: 2.5rem;
     font-size: $font-size-l;
     transition: all $animation-fast ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // Note: alignment handled by GTK Button widget properties
 
     &:hover {
         background: $surface-container-highest;
@@ -319,7 +313,7 @@
 }
 
 .calendar-events-list {
-    gap: $spacing-xs;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 .calendar-event-item {
@@ -361,16 +355,15 @@
 }
 
 .audio-devices-list {
-    gap: $spacing-xs;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 .audio-device-row {
     background: $surface-container-high;
     border-radius: $radius-m;
     padding: $spacing-s $spacing-m;
-    gap: $spacing-m;
     transition: all $animation-fast ease;
-    cursor: pointer;
+    // Note: spacing and cursor handled by GTK widget properties
 
     &:hover {
         background: $surface-container-highest;
@@ -403,7 +396,7 @@
     background: $primary-container;
     border-radius: $radius-m;
     padding: $spacing-m;
-    gap: $spacing-m;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 .network-connected-name {
@@ -424,7 +417,7 @@
 }
 
 .network-list {
-    gap: $spacing-xs;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 .network-row {
@@ -432,10 +425,8 @@
     background: $surface-container-high;
     border-radius: $radius-m;
     padding: $spacing-s $spacing-m;
-    display: flex;
-    gap: $spacing-m;
     transition: all $animation-fast ease;
-    cursor: pointer;
+    // Note: layout, spacing, and cursor handled by GTK widget properties
 
     &:hover {
         background: $surface-container-highest;
@@ -461,7 +452,7 @@
     font-size: $font-size-m;
     color: $on-surface-variant;
     padding: $spacing-l;
-    text-align: center;
+    // Note: text alignment handled by GTK Label 'halign' property
 }
 
 .network-toggle,
@@ -475,7 +466,7 @@
 }
 
 .bluetooth-devices-list {
-    gap: $spacing-xs;
+    // Note: spacing handled by GTK Box widget 'spacing' property
 }
 
 .bluetooth-device-row {
@@ -483,10 +474,8 @@
     background: $surface-container-high;
     border-radius: $radius-m;
     padding: $spacing-s $spacing-m;
-    display: flex;
-    gap: $spacing-m;
     transition: all $animation-fast ease;
-    cursor: pointer;
+    // Note: layout, spacing, and cursor handled by GTK widget properties
 
     &:hover {
         background: $surface-container-highest;

@@ -78,38 +78,20 @@ class Dock(widgets.Window):
         return ["bottom", "left", "right"]  # fallback
 
     def _build_dock_items(self) -> list:
-        """Build list of dock items (pinned + running)."""
+        """Build list of dock items (pinned apps only for now)."""
         items = []
         pinned_ids = user_options.dock.pinned_apps
-        running_apps = apps_service.query("")  # All running apps
 
-        # Get running app IDs/names for comparison
-        running_app_ids = set()
-        for app in running_apps:
-            # Try desktop file first, then app name
-            if app.desktop_file:
-                running_app_ids.add(app.desktop_file)
-            if app.name:
-                running_app_ids.add(app.name.lower())
+        # Note: ApplicationsService doesn't track running apps
+        # TODO: Integrate with WindowManager service for running app tracking
 
         # Add pinned apps
         for app_id in pinned_ids:
             app = self._find_app(app_id)
             if app:
-                # Check if this pinned app is running
-                is_running = (
-                    app.desktop_file in running_app_ids
-                    or (app.name and app.name.lower() in running_app_ids)
-                )
-                item = DockItem(app, pinned=True, running=is_running, dock=self)
-                items.append(item)
-                self._items.append(item)
-
-        # Add non-pinned running apps
-        for app in running_apps:
-            app_id = app.desktop_file if app.desktop_file else app.name
-            if app_id not in pinned_ids:
-                item = DockItem(app, pinned=False, running=True, dock=self)
+                # For now, treat all pinned apps as not running
+                # TODO: Check actual running state via window manager
+                item = DockItem(app, pinned=True, running=False, dock=self)
                 items.append(item)
                 self._items.append(item)
 
@@ -123,7 +105,7 @@ class Dock(widgets.Window):
             return app
 
         # Try case-insensitive name search
-        all_apps = apps_service.query("")
+        all_apps = apps_service.apps
         for app in all_apps:
             if app.name and app.name.lower() == app_id.lower():
                 return app
@@ -131,7 +113,7 @@ class Dock(widgets.Window):
                 return app
 
         # Try fuzzy search as last resort
-        results = apps_service.query(app_id, 1)
+        results = apps_service.search(apps_service.apps, app_id)
         return results[0] if results else None
 
     def _on_apps_changed(self):
