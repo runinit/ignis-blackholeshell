@@ -23,8 +23,14 @@ class BatteryItem(widgets.Box):
 
 class Battery(widgets.Box):
     def __init__(self):
-        super().__init__(
-            setup=lambda self: upower.connect(
-                "battery-added", lambda x, device: self.append(BatteryItem(device))
-            ),
+        super().__init__(css_classes=["battery"])
+
+        # Add existing batteries first
+        for device in upower.devices:
+            if device.is_battery:
+                self.append(BatteryItem(device))
+
+        # Then listen for new batteries
+        upower.connect(
+            "battery-added", lambda x, device: self.append(BatteryItem(device))
         )
