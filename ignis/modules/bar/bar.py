@@ -75,7 +75,7 @@ class Bar(widgets.Window):
                     widgets.Box(child=[], valign="center", vexpand=True),  # Apps() temporarily disabled for testing
                     widgets.Box(
                         orientation="vertical",
-                        child=[Tray(), KeyboardLayout(), Battery(), StatusPill(monitor)],
+                        child=[KeyboardLayout(), Battery(), StatusPill(monitor)],  # Tray() temporarily disabled for testing
                         valign="end",
                     ),
                 ],
@@ -87,6 +87,6 @@ class Bar(widgets.Window):
                 start_widget=widgets.Box(child=[Workspaces()]),
                 center_widget=widgets.Box(child=[]),  # Apps() temporarily disabled for testing
                 end_widget=widgets.Box(
-                    child=[Tray(), KeyboardLayout(), Battery(), StatusPill(monitor)]
+                    child=[KeyboardLayout(), Battery(), StatusPill(monitor)]  # Tray() temporarily disabled for testing
                 ),
             )
