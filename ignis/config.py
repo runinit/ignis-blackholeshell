@@ -173,3 +173,16 @@ debug_log("Creating WallpaperPicker...")
 WallpaperPicker()
 
 debug_log("All modules initialized successfully!")
+
+# Check window visibility
+from ignis.window_manager import WindowManager
+wm = WindowManager.get_default()
+debug_log(f"Checking window visibility...")
+for window_name in ["ignis_BAR_0", "ignis_CONTROL_CENTER", "ignis_DOCK_0", "ignis_LAUNCHER"]:
+    window = wm.get_window(window_name)
+    if window:
+        debug_log(f"  {window_name}: visible={window.visible}, monitor={getattr(window, 'monitor', 'N/A')}")
+    else:
+        debug_log(f"  {window_name}: NOT FOUND")
+
+debug_log("Initialization complete. Windows should be visible now.")
