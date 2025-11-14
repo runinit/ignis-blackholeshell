@@ -39,6 +39,18 @@ class Dock(widgets.Window):
             child=self._build_dock_items(),
         )
 
+        # Store references for auto-hide setup (done after super().__init__)
+        self._auto_hide_enabled = user_options.dock.auto_hide
+
+        # Wrap dock_box in EventBox for hover detection (auto-hide)
+        dock_child = self._dock_box
+        if self._auto_hide_enabled and enabled:
+            dock_child = widgets.EventBox(
+                on_hover=lambda x: self._on_dock_enter(),
+                on_hover_lost=lambda x: self._on_dock_leave(),
+                child=self._dock_box,
+            )
+
         super().__init__(
             namespace=f"ignis_DOCK_{monitor}",
             monitor=monitor,
@@ -48,11 +60,10 @@ class Dock(widgets.Window):
             kb_mode="none",
             css_classes=css_classes,
             visible=enabled and not user_options.dock.auto_hide,
-            child=self._dock_box,
+            child=dock_child,
         )
 
         # Auto-hide state management
-        self._auto_hide_enabled = user_options.dock.auto_hide
         self._is_hidden = False
         self._show_timer_id = None
         self._hide_timer_id = None
@@ -175,9 +186,8 @@ class Dock(widgets.Window):
         elif self.position == "right":
             self._peek_window.set_size_request(reveal_size, -1)
 
-        # Add hover handlers to dock itself
-        self.connect("enter-notify-event", lambda *_: self._on_dock_enter())
-        self.connect("leave-notify-event", lambda *_: self._on_dock_leave())
+        # Note: Hover handlers for dock are set via EventBox wrapper in __init__
+        # No need for GTK3-style signal connections (enter-notify-event, leave-notify-event)
 
         # Initially hide dock if auto-hide is enabled
         self._is_hidden = True
