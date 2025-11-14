@@ -142,6 +142,14 @@ class UserOptions(OptionsManager):
         shuffle_enabled: bool = True
 
     class Bar(OptionsGroup):
+        # Position and Layout (Phase 2)
+        position: str = "top"  # top/bottom/left/right
+        floating: bool = False  # Floating mode with margins
+        float_margin: int = 8  # Margin in pixels when floating
+        density: str = "comfortable"  # compact/comfortable/spacious
+        corner_radius: int = 0  # -1=square, 0=normal, 1-2=inverted
+
+        # Size and Appearance (Legacy)
         height: int = 40  # pixels, range 20-120
         background_enabled: bool = True
         transparency: float = 0.7  # 0.0 to 1.0 (0% to 100% opaque)
@@ -150,11 +158,25 @@ class UserOptions(OptionsManager):
         margin_top: int = 0  # top margin in pixels
         margin_sides: int = 0  # left/right margin in pixels
 
+    class Dock(OptionsGroup):
+        # Dock Configuration (Phase 2)
+        enabled: bool = True  # Enable/disable dock
+        position: str = "bottom"  # bottom/left/right
+        size: float = 1.0  # Icon size multiplier (0.5-2.0)
+        auto_hide: bool = True  # Auto-hide functionality
+        pinned_apps: list[str] = [
+            "firefox",
+            "kitty",
+            "org.gnome.Nautilus",
+            "code",
+        ]  # Desktop file IDs or app names
+
     user = User()
     settings = Settings()
     material = Material()
     wallpaper_slideshow = WallpaperSlideshow()
     bar = Bar()
+    dock = Dock()
 
 
 user_options = UserOptions()

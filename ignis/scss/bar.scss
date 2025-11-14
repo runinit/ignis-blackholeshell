@@ -1,3 +1,96 @@
+// Bar Adaptive Positioning (Phase 2)
+// Using Blackhole design tokens for consistent styling
+
+.bar {
+    // Base styling
+    background: $surface-container;
+    border-radius: $radius-m;
+    transition: all $animation-normal ease;
+
+    // Top position (default)
+    &.position-top {
+        &.floating {
+            border-radius: $radius-l;
+            box-shadow: $shadow-elevation-2;
+            backdrop-filter: blur(10px);
+            background: rgba($surface-container, 0.95);
+        }
+        &:not(.floating) {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+    }
+
+    // Bottom position
+    &.position-bottom {
+        &.floating {
+            border-radius: $radius-l;
+            box-shadow: $shadow-elevation-2;
+            backdrop-filter: blur(10px);
+            background: rgba($surface-container, 0.95);
+        }
+        &:not(.floating) {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    // Left position (vertical)
+    &.position-left {
+        &.floating {
+            border-radius: $radius-l;
+            box-shadow: $shadow-elevation-2;
+            backdrop-filter: blur(10px);
+            background: rgba($surface-container, 0.95);
+        }
+        &:not(.floating) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
+    // Right position (vertical)
+    &.position-right {
+        &.floating {
+            border-radius: $radius-l;
+            box-shadow: $shadow-elevation-2;
+            backdrop-filter: blur(10px);
+            background: rgba($surface-container, 0.95);
+        }
+        &:not(.floating) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    // Corner radius variants
+    &.square {
+        border-radius: 0;
+    }
+
+    // Density variants
+    &.density-compact {
+        .bar-widget {
+            min-height: 32px;
+            padding: $spacing-xxs $spacing-s;
+        }
+    }
+
+    &.density-comfortable {
+        .bar-widget {
+            min-height: 40px;
+            padding: $spacing-xs $spacing-m;
+        }
+    }
+
+    &.density-spacious {
+        .bar-widget {
+            min-height: 48px;
+            padding: $spacing-s $spacing-l;
+        }
+    }
+}
+
 .bar-widget {
     min-height: $bar_height;
     padding: $bar_padding_v $bar_padding_h;
