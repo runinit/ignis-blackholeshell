@@ -140,8 +140,17 @@ class Dock(widgets.Window):
         self._items.clear()
         new_items = self._build_dock_items()
 
-        # Update dock box children
-        self._dock_box.set_child(new_items)
+        # Update dock box children - remove all existing children first
+        # Get current children and remove them
+        child = self._dock_box.get_first_child()
+        while child:
+            next_child = child.get_next_sibling()
+            self._dock_box.remove(child)
+            child = next_child
+
+        # Add new items
+        for item in new_items:
+            self._dock_box.append(item)
 
     def pin_app(self, app_id: str):
         """Pin an app to the dock."""
