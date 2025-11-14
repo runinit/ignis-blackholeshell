@@ -1,4 +1,4 @@
-from services.material import MaterialService
+from services.material import MaterialService, ColorSchemeService
 from ..elements import (
     SwitchRow,
     SettingsPage,
@@ -11,6 +11,7 @@ from ..elements import (
 from user_options import user_options
 
 material = MaterialService.get_default()
+color_scheme_service = ColorSchemeService.get_default()
 
 
 class MaterialEntry(SettingsEntry):
@@ -36,12 +37,31 @@ class MaterialEntry(SettingsEntry):
         page = SettingsPage(
             name="Material You",
             groups=[
-                # Color Palette Configuration
+                # Color Scheme Selection (NEW)
                 SettingsGroup(
-                    name="Color Palette",
+                    name="Color Scheme",
                     rows=[
                         ComboBoxRow(
-                            label="Palette Type",
+                            label="Built-in Color Scheme",
+                            sublabel="Select a pre-defined color palette",
+                            items=color_scheme_service.available_schemes,
+                            selected=self._get_scheme_index(),
+                            on_change=lambda x, index: self._on_scheme_changed(index),
+                        ),
+                        SwitchRow(
+                            label="Use Wallpaper Colors",
+                            sublabel="Generate colors dynamically from wallpaper",
+                            active=user_options.material.bind("use_wallpaper_colors"),
+                            on_change=lambda x, active: self._on_wallpaper_toggle(active),
+                        ),
+                    ],
+                ),
+                # Matugen Configuration (for wallpaper-based generation)
+                SettingsGroup(
+                    name="Wallpaper Color Generation",
+                    rows=[
+                        ComboBoxRow(
+                            label="Matugen Scheme Type",
                             sublabel="Algorithm for generating color palettes from wallpaper",
                             items=palette_labels,
                             selected=self._get_palette_index(),
@@ -190,10 +210,34 @@ class MaterialEntry(SettingsEntry):
             icon="applications-graphics-symbolic",
         )
 
+    def _get_scheme_index(self) -> int:
+        """Get the index of the current color scheme."""
+        current_scheme = user_options.material.scheme_name
+        schemes = color_scheme_service.available_schemes
+        try:
+            return schemes.index(current_scheme)
+        except ValueError:
+            return 0  # Default to first scheme
+
     def _get_palette_index(self) -> int:
-        """Get the index of the current palette type."""
+        """Get the index of the current matugen palette type."""
         current = user_options.material.matugen_scheme_type
         try:
             return self._palette_values.index(current)
         except ValueError:
             return 0  # Default to tonal-spot
+
+    def _on_scheme_changed(self, index: int) -> None:
+        """Handle color scheme selection."""
+        schemes = color_scheme_service.available_schemes
+        if 0 <= index < len(schemes):
+            scheme_name = schemes[index]
+            user_options.material.set_scheme_name(scheme_name)
+            color_scheme_service.set_scheme(scheme_name)
+            user_options.save_to_file(user_options._file)
+
+    def _on_wallpaper_toggle(self, active: bool) -> None:
+        """Handle wallpaper colors toggle."""
+        user_options.material.set_use_wallpaper_colors(active)
+        color_scheme_service.use_wallpaper_colors = active
+        user_options.save_to_file(user_options._file)
