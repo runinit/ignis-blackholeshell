@@ -1,3 +1,12 @@
-from .osd import OSD
+"""
+OSD (On-Screen Display) Module - Phase 4.
 
-__all__ = ["OSD"]
+Provides modern OSD windows for volume, brightness, and other system notifications
+with Noctalia-inspired design and smooth animations.
+"""
+
+from .osd_window import OSDWindow
+from .volume_osd import VolumeOSD
+from .brightness_osd import BrightnessOSD
+
+__all__ = ["OSDWindow", "VolumeOSD", "BrightnessOSD"]

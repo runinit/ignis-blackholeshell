@@ -1,8 +1,78 @@
-.osd {
-    @include window;
-    min-width: 15rem;
-    margin-bottom: 5rem;
-    * {
-        all: unset
+// OSD (On-Screen Display) Styling (Phase 4)
+// Using Blackhole design tokens for Noctalia aesthetics
+
+.osd-window {
+    background: rgba($surface-container, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: $radius-l;
+    padding: $spacing-l;
+    box-shadow: $shadow-elevation-4;
+    margin-top: $spacing-l;
+
+    &.showing {
+        animation: osd-fade-in $animation-normal ease;
     }
+
+    &.hiding {
+        animation: osd-fade-out $animation-normal ease;
+    }
+}
+
+@keyframes osd-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes osd-fade-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.osd-container {
+    min-width: 300px;
+    align-items: center;
+}
+
+.osd-icon {
+    color: $on-surface;
+    margin-bottom: $spacing-m;
+}
+
+.osd-progress {
+    min-height: 8px;
+    min-width: 280px;
+    border-radius: $radius-full;
+
+    trough {
+        min-height: 8px;
+        border-radius: $radius-full;
+        background: $surface-container-high;
+    }
+
+    block {
+        background: $primary;
+        border-radius: $radius-full;
+    }
+
+    // Smooth progress animation
+    transition: all $animation-fast ease;
+}
+
+.osd-label {
+    font-size: $font-size-l;
+    font-weight: 600;
+    color: $on-surface;
+    margin-top: $spacing-s;
 }
