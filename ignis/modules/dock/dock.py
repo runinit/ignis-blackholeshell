@@ -20,8 +20,17 @@ from user_options import user_options
 print("[DOCK] Imported user_options", file=sys.stderr)
 
 
-apps_service = ApplicationsService.get_default()
-print("[DOCK] Got ApplicationsService instance", file=sys.stderr)
+# Lazy initialization - don't initialize services at import time
+_apps_service = None
+
+def get_apps_service():
+    """Lazy load ApplicationsService"""
+    global _apps_service
+    if _apps_service is None:
+        print("[DOCK] Initializing ApplicationsService...", file=sys.stderr)
+        _apps_service = ApplicationsService.get_default()
+        print("[DOCK] ApplicationsService initialized", file=sys.stderr)
+    return _apps_service
 
 
 class Dock(widgets.Window):
@@ -127,7 +136,8 @@ class Dock(widgets.Window):
 
     def _find_app(self, app_id: str) -> ApplicationsService | None:
         """Find an application by ID or name."""
-        all_apps = apps_service.apps
+        apps_svc = get_apps_service()
+        all_apps = apps_svc.apps
 
         # Try exact desktop file match first
         for app in all_apps:
@@ -142,7 +152,7 @@ class Dock(widgets.Window):
                 return app
 
         # Try fuzzy search as last resort
-        results = apps_service.search(apps_service.apps, app_id)
+        results = apps_svc.search(apps_svc.apps, app_id)
         return results[0] if results else None
 
     def _on_apps_changed(self):
