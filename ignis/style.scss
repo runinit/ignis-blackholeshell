@@ -1,3 +1,6 @@
+// Import Blackhole Shell design tokens first (must be before everything else)
+@import "scss/_blackhole_tokens.scss";
+
 * {
     font-family: JetBrainsMono;
     font-weight: bold;

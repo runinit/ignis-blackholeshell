@@ -1,0 +1,343 @@
+/**
+ * Example: Using Blackhole Shell Design Tokens
+ *
+ * This file demonstrates how to use the design tokens defined in _blackhole_tokens.scss
+ * You can reference this when updating existing components or creating new ones.
+ */
+
+// ============================================================
+// TYPOGRAPHY EXAMPLES
+// ============================================================
+
+.example-text-styles {
+    // Use predefined font sizes
+    .heading {
+        font-size: $font-size-xxxl;
+        font-weight: $font-weight-bold;
+    }
+
+    .subheading {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+    }
+
+    .body {
+        font-size: $font-size-m;
+        font-weight: $font-weight-regular;
+    }
+
+    .caption {
+        font-size: $font-size-s;
+        font-weight: $font-weight-regular;
+        color: $on-surface-variant;
+    }
+}
+
+// ============================================================
+// SPACING EXAMPLES
+// ============================================================
+
+.example-spacing {
+    // Use spacing tokens for consistent gaps
+    padding: $spacing-m;
+    margin-bottom: $spacing-l;
+
+    .item + .item {
+        margin-top: $spacing-s;
+    }
+
+    // For larger gaps
+    .section {
+        padding: $spacing-xl;
+    }
+}
+
+// ============================================================
+// BORDER RADIUS EXAMPLES
+// ============================================================
+
+.example-shapes {
+    // Small radius for buttons
+    .button {
+        border-radius: $radius-xs;
+    }
+
+    // Medium radius for cards
+    .card {
+        border-radius: $radius-s;
+    }
+
+    // Large radius for panels
+    .panel {
+        border-radius: $radius-m;
+    }
+
+    // Screen radius for window corners
+    .window {
+        border-radius: $radius-screen;
+    }
+}
+
+// ============================================================
+// COLOR EXAMPLES
+// ============================================================
+
+.example-colors {
+    // Use Material Design 3 color roles
+    .primary-button {
+        background-color: $primary;
+        color: $on-primary;
+
+        &:hover {
+            background-color: $primary-container;
+            color: $on-primary-container;
+        }
+    }
+
+    .card {
+        background-color: $surface-container;
+        color: $on-surface;
+        border: $border-s solid $outline-variant;
+    }
+
+    .error-message {
+        background-color: $error-container;
+        color: $on-error-container;
+        border-left: 3px solid $error;
+    }
+
+    // Surface elevation levels
+    .surface-low {
+        background-color: $surface-container-low;
+    }
+
+    .surface-normal {
+        background-color: $surface-container;
+    }
+
+    .surface-high {
+        background-color: $surface-container-high;
+    }
+}
+
+// ============================================================
+// SHADOW EXAMPLES
+// ============================================================
+
+.example-shadows {
+    // Light elevation
+    .card-flat {
+        box-shadow: $shadow-light;
+    }
+
+    // Medium elevation (dropdowns, tooltips)
+    .dropdown {
+        box-shadow: $shadow-medium;
+    }
+
+    // Heavy elevation (modals, dialogs)
+    .modal {
+        box-shadow: $shadow-heavy;
+    }
+
+    // Custom shadow
+    .floating-button {
+        box-shadow: $shadow-standard;
+    }
+}
+
+// ============================================================
+// OPACITY EXAMPLES
+// ============================================================
+
+.example-opacity {
+    // Disabled state
+    .disabled {
+        opacity: $opacity-medium;
+    }
+
+    // Subtle backgrounds
+    .overlay {
+        background-color: $scrim;
+        opacity: $opacity-heavy;
+    }
+
+    // Hover state
+    .hoverable {
+        opacity: $opacity-almost;
+
+        &:hover {
+            opacity: $opacity-full;
+        }
+    }
+}
+
+// ============================================================
+// ANIMATION EXAMPLES
+// ============================================================
+
+.example-animations {
+    // Quick transition
+    .button {
+        @include transition-standard(background-color);
+        transition-duration: $animation-fast;
+    }
+
+    // Smooth slide-in
+    .panel {
+        transition: transform $animation-normal $ease-out-cubic;
+    }
+
+    // Slow fade
+    .modal-backdrop {
+        transition: opacity $animation-slow $ease-in-out-cubic;
+    }
+
+    // Tooltip delay
+    .tooltip {
+        transition-delay: $delay-tooltip;
+    }
+}
+
+// ============================================================
+// MIXIN EXAMPLES
+// ============================================================
+
+.example-mixins {
+    // Standard card styling
+    .card {
+        @include card-base;
+    }
+
+    // Floating element with shadow
+    .floating-panel {
+        @include floating;
+    }
+
+    // Focus state
+    .input {
+        &:focus {
+            @include focus-ring;
+        }
+    }
+
+    // Truncate long text
+    .label {
+        @include text-truncate;
+        max-width: 200px;
+    }
+
+    // Standard transition
+    .animated-box {
+        @include transition-standard(all);
+    }
+}
+
+// ============================================================
+// COMPLETE COMPONENT EXAMPLE
+// ============================================================
+
+.example-complete-component {
+    // Use the card base as foundation
+    @include card-base;
+
+    // Add specific styling
+    .header {
+        font-size: $font-size-l;
+        font-weight: $font-weight-semibold;
+        color: $on-surface;
+        margin-bottom: $spacing-m;
+        padding-bottom: $spacing-s;
+        border-bottom: $border-s solid $outline-variant;
+    }
+
+    .content {
+        font-size: $font-size-m;
+        color: $on-surface-variant;
+        line-height: 1.5;
+    }
+
+    .actions {
+        margin-top: $spacing-m;
+        display: flex;
+        gap: $spacing-s;
+
+        .action-button {
+            padding: $spacing-s $spacing-m;
+            border-radius: $radius-xs;
+            font-size: $font-size-m;
+            font-weight: $font-weight-medium;
+            @include transition-standard(background-color);
+
+            &.primary {
+                background-color: $primary;
+                color: $on-primary;
+
+                &:hover {
+                    background-color: $primary-container;
+                }
+            }
+
+            &.secondary {
+                background-color: $surface-container-high;
+                color: $on-surface;
+
+                &:hover {
+                    background-color: $surface-bright;
+                }
+            }
+        }
+    }
+
+    // Add hover state
+    &:hover {
+        box-shadow: $shadow-heavy;
+        @include transition-standard(box-shadow);
+    }
+}
+
+// ============================================================
+// RESPONSIVE EXAMPLE
+// ============================================================
+
+.example-responsive {
+    padding: $spacing-m;
+
+    @media (min-width: $breakpoint-md) {
+        padding: $spacing-l;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+        padding: $spacing-xl;
+    }
+}
+
+// ============================================================
+// Z-INDEX EXAMPLE
+// ============================================================
+
+.example-layering {
+    .background {
+        z-index: $z-background;
+    }
+
+    .content {
+        z-index: $z-default;
+    }
+
+    .dropdown {
+        z-index: $z-dropdown;
+    }
+
+    .modal {
+        z-index: $z-modal;
+    }
+
+    .tooltip {
+        z-index: $z-tooltip;
+    }
+
+    .notification {
+        z-index: $z-notification;
+    }
+}
