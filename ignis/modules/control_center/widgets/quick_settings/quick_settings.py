@@ -38,10 +38,10 @@ class QuickSettings(widgets.Box):
 
     def __configure(self) -> None:
         self.__qs_fabric(
-            *wifi_control(),
+            # *wifi_control(),      # Temporarily disabled for testing
             # *ethernet_control(),  # Temporarily disabled for testing
             # *vpn_control(),       # Temporarily disabled for testing
-            *bluetooth_control(),
+            # *bluetooth_control(), # Temporarily disabled for testing
             DNDButton(),
             DarkModeButton(),
             RecordButton(),
