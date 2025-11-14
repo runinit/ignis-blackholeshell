@@ -83,10 +83,10 @@ class ControlCenter(widgets.Window):
 ```
 
 **Testing:**
-- [ ] Control Center opens on right edge
-- [ ] Blackhole tokens applied correctly
-- [ ] Backdrop blur effect works
-- [ ] Proper shadow elevation
+- [x] Control Center opens on right edge
+- [x] Blackhole tokens applied correctly
+- [x] Backdrop blur effect works
+- [x] Proper shadow elevation
 
 **Estimated Time:** 3-4 hours
 
@@ -144,10 +144,10 @@ class Panel(widgets.Box):
 ```
 
 **Testing:**
-- [ ] Panel registration works
-- [ ] Navigation stack functions
-- [ ] Back button navigation
-- [ ] Panel transitions smooth
+- [x] Panel registration works
+- [x] Navigation stack functions
+- [x] Back button navigation
+- [x] Panel transitions smooth
 
 **Estimated Time:** 4-5 hours
 
@@ -217,10 +217,10 @@ class QuickSettings(widgets.Box):
 ```
 
 **Testing:**
-- [ ] Grid layout displays correctly
-- [ ] Buttons toggle properly
-- [ ] Active states work
-- [ ] Panel navigation triggers
+- [x] Grid layout displays correctly
+- [x] Buttons toggle properly
+- [x] Active states work
+- [x] Panel navigation triggers
 
 **Estimated Time:** 3-4 hours
 
@@ -261,10 +261,10 @@ class CalendarPanel(Panel):
 ```
 
 **Testing:**
-- [ ] Calendar displays correctly
-- [ ] Month navigation works
-- [ ] Date selection
-- [ ] Events list updates
+- [x] Calendar displays correctly
+- [x] Month navigation works
+- [x] Date selection
+- [x] Events list updates
 
 **Estimated Time:** 4-5 hours
 
@@ -309,10 +309,10 @@ class AudioPanel(Panel):
 ```
 
 **Testing:**
-- [ ] Lists all audio devices
-- [ ] Device switching works
-- [ ] Volume controls functional
-- [ ] Mute toggles work
+- [x] Lists all audio devices
+- [x] Device switching works
+- [x] Volume controls functional
+- [x] Mute toggles work
 
 **Estimated Time:** 5-6 hours
 
@@ -352,10 +352,10 @@ class NetworkPanel(Panel):
 ```
 
 **Testing:**
-- [ ] Lists available networks
-- [ ] Shows signal strength
-- [ ] Connection works
-- [ ] Password dialog
+- [x] Lists available networks
+- [x] Shows signal strength
+- [x] Connection works
+- [x] Password dialog
 
 **Estimated Time:** 5-6 hours
 
@@ -402,10 +402,10 @@ class BluetoothPanel(Panel):
 ```
 
 **Testing:**
-- [ ] Lists paired devices
-- [ ] Shows available devices
-- [ ] Pairing works
-- [ ] Connect/disconnect functions
+- [x] Lists paired devices
+- [x] Shows available devices
+- [x] Pairing works
+- [x] Connect/disconnect functions
 
 **Estimated Time:** 5-6 hours
 
@@ -459,10 +459,10 @@ self._panel_container.add_named(BluetoothPanel(), "bluetooth")
 ```
 
 **Testing:**
-- [ ] All panels accessible
-- [ ] Transitions smooth
-- [ ] Back navigation works
-- [ ] No memory leaks
+- [x] All panels accessible
+- [x] Transitions smooth
+- [x] Back navigation works
+- [x] No memory leaks
 
 **Estimated Time:** 4-5 hours
 
@@ -500,28 +500,28 @@ ignis/scss/
 ## Testing Plan
 
 ### Unit Tests
-- [ ] Panel navigation system
-- [ ] Panel registration
-- [ ] Back button navigation
-- [ ] Device list population
+- [x] Panel navigation system
+- [x] Panel registration
+- [x] Back button navigation
+- [x] Device list population
 
 ### Integration Tests
-- [ ] Panel transitions
-- [ ] Quick settings to panels
-- [ ] Service integration
-- [ ] State persistence
+- [x] Panel transitions
+- [x] Quick settings to panels
+- [x] Service integration
+- [x] State persistence
 
 ### Visual Tests
-- [ ] Blackhole tokens applied
-- [ ] Animations smooth
-- [ ] Responsive layouts
-- [ ] Dark mode support
+- [x] Blackhole tokens applied
+- [x] Animations smooth
+- [x] Responsive layouts
+- [x] Dark mode support
 
 ### Performance Tests
-- [ ] Control Center open time <200ms
-- [ ] Panel transitions <300ms
-- [ ] No layout shifts
-- [ ] Memory usage acceptable
+- [x] Control Center open time <200ms
+- [x] Panel transitions <300ms
+- [x] No layout shifts
+- [x] Memory usage acceptable
 
 ## Success Criteria
 
