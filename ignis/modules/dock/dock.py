@@ -87,7 +87,7 @@ class Dock(widgets.Window):
                     app.desktop_file in running_app_ids
                     or (app.name and app.name.lower() in running_app_ids)
                 )
-                item = DockItem(app, pinned=True, running=is_running)
+                item = DockItem(app, pinned=True, running=is_running, dock=self)
                 items.append(item)
                 self._items.append(item)
 
@@ -95,7 +95,7 @@ class Dock(widgets.Window):
         for app in running_apps:
             app_id = app.desktop_file if app.desktop_file else app.name
             if app_id not in pinned_ids:
-                item = DockItem(app, pinned=False, running=True)
+                item = DockItem(app, pinned=False, running=True, dock=self)
                 items.append(item)
                 self._items.append(item)
 
