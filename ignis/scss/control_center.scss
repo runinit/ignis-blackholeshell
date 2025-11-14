@@ -23,6 +23,63 @@
     gap: $spacing-s;
 }
 
+// Panel Navigation System (Phase 3, Task 2)
+.panel-container {
+    transition: all $animation-normal ease;
+}
+
+.panel {
+    animation: slideIn $animation-normal ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.panel-header {
+    padding: $spacing-s $spacing-m;
+    margin-bottom: $spacing-m;
+    display: flex;
+    align-items: center;
+    gap: $spacing-s;
+}
+
+.panel-back-button {
+    all: unset;
+    background: $surface-container-high;
+    color: $on-surface;
+    border-radius: $radius-full;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    font-size: $font-size-l;
+    transition: all $animation-fast ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.panel-title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $on-surface;
+}
+
 // Legacy widget padding (keep for compatibility)
 .control-center-widget {
     padding: $spacing-m;
