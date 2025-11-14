@@ -18,7 +18,6 @@ class TrayItem(widgets.Button):
             child=widgets.Box(
                 child=[
                     widgets.Icon(image=item.bind("icon"), pixel_size=24),
-                    menu,
                 ]
             ),
             tooltip_text=item.bind("tooltip"),
