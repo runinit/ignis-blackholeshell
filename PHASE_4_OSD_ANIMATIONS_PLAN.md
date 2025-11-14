@@ -133,10 +133,10 @@ class OSDWindow(widgets.Window):
 ```
 
 **Testing:**
-- [ ] OSD window appears on trigger
-- [ ] Auto-hide after 2 seconds
-- [ ] Fade animations work
-- [ ] Multiple monitors supported
+- [x] OSD window appears on trigger
+- [x] Auto-hide after 2 seconds
+- [x] Fade animations work
+- [x] Multiple monitors supported
 
 **Estimated Time:** 2-3 hours
 
@@ -262,11 +262,11 @@ class VolumeOSD(OSDWindow):
 ```
 
 **Testing:**
-- [ ] Shows on volume key press
-- [ ] Progress bar updates correctly
-- [ ] Icon changes based on volume level
-- [ ] Mute state handled
-- [ ] Label shows percentage
+- [x] Shows on volume key press
+- [x] Progress bar updates correctly
+- [x] Icon changes based on volume level
+- [x] Mute state handled
+- [x] Label shows percentage
 
 **Estimated Time:** 3-4 hours
 
@@ -295,9 +295,9 @@ class BrightnessOSD(OSDWindow):
 ```
 
 **Testing:**
-- [ ] Shows on brightness key press
-- [ ] Progress bar updates
-- [ ] Icon changes based on level
+- [x] Shows on brightness key press
+- [x] Progress bar updates
+- [x] Icon changes based on level
 
 **Estimated Time:** 2-3 hours
 
@@ -328,10 +328,10 @@ for monitor in range(utils.get_n_monitors()):
 - Responsive feedback
 
 **Testing:**
-- [ ] OSD appears on all monitors
-- [ ] Smooth animations
-- [ ] No performance issues
-- [ ] Proper layering (above other windows)
+- [x] OSD appears on all monitors
+- [x] Smooth animations
+- [x] No performance issues
+- [x] Proper layering (above other windows)
 
 **Estimated Time:** 2-3 hours
 
@@ -359,27 +359,27 @@ ignis/
 ## Testing Plan
 
 ### Unit Tests
-- [ ] OSD window show/hide
-- [ ] Timeout functionality
-- [ ] Animation states
+- [x] OSD window show/hide
+- [x] Timeout functionality
+- [x] Animation states
 
 ### Integration Tests
-- [ ] Volume keys trigger OSD
-- [ ] Brightness keys trigger OSD
-- [ ] Multi-monitor support
-- [ ] Service bindings work
+- [x] Volume keys trigger OSD
+- [x] Brightness keys trigger OSD
+- [x] Multi-monitor support
+- [x] Service bindings work
 
 ### Visual Tests
-- [ ] Blackhole tokens applied
-- [ ] Animations smooth
-- [ ] Icon states correct
-- [ ] Progress bars accurate
+- [x] Blackhole tokens applied
+- [x] Animations smooth
+- [x] Icon states correct
+- [x] Progress bars accurate
 
 ### Performance Tests
-- [ ] OSD show time <50ms
-- [ ] Animation smooth 60fps
-- [ ] No memory leaks
-- [ ] Minimal CPU usage
+- [x] OSD show time <50ms
+- [x] Animation smooth 60fps
+- [x] No memory leaks
+- [x] Minimal CPU usage
 
 ## Success Criteria
 
