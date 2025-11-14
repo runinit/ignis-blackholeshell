@@ -60,8 +60,10 @@ class Dock(widgets.Window):
         self.monitor = monitor
         self.position = position
 
-        # Listen to app changes
-        apps_service.connect("changed", lambda *_: self._on_apps_changed())
+        # TODO: Listen to app changes when WindowManager integration is added
+        # ApplicationsService doesn't emit a "changed" signal
+        # Will need to connect to WindowManager signals for running app tracking
+        # apps_service.connect("changed", lambda *_: self._on_apps_changed())
 
         # Setup auto-hide if enabled
         if self._auto_hide_enabled and enabled:
