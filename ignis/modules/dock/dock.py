@@ -1,15 +1,27 @@
 """
 Dock window - Main dock implementation.
 """
+import sys
+print("[DOCK] Starting dock.py import", file=sys.stderr)
 
 from gi.repository import GLib
+print("[DOCK] Imported GLib", file=sys.stderr)
+
 from ignis import widgets
+print("[DOCK] Imported widgets", file=sys.stderr)
+
 from ignis.services.applications import ApplicationsService
+print("[DOCK] Imported ApplicationsService", file=sys.stderr)
+
 from .dock_item import DockItem
+print("[DOCK] Imported DockItem", file=sys.stderr)
+
 from user_options import user_options
+print("[DOCK] Imported user_options", file=sys.stderr)
 
 
 apps_service = ApplicationsService.get_default()
+print("[DOCK] Got ApplicationsService instance", file=sys.stderr)
 
 
 class Dock(widgets.Window):
