@@ -7,8 +7,12 @@ print("[DOCK_ITEM] Starting dock_item.py import", file=sys.stderr)
 from ignis import widgets
 print("[DOCK_ITEM] Imported widgets", file=sys.stderr)
 
-from ignis.services.applications import Application
-print("[DOCK_ITEM] Imported Application", file=sys.stderr)
+# Defer Application import - it's from the expensive applications service module
+# We'll use TYPE_CHECKING to get type hints without runtime import
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from ignis.services.applications import Application
+print("[DOCK_ITEM] Skipped Application import (using TYPE_CHECKING)", file=sys.stderr)
 
 from ignis.menu_model import IgnisMenuModel, IgnisMenuItem, IgnisMenuSeparator
 print("[DOCK_ITEM] Imported menu models", file=sys.stderr)
@@ -20,7 +24,7 @@ print("[DOCK_ITEM] Imported user_options", file=sys.stderr)
 class DockItem(widgets.Button):
     """A single application icon in the dock."""
 
-    def __init__(self, app: Application, pinned: bool, running: bool, dock):
+    def __init__(self, app: "Application", pinned: bool, running: bool, dock):
         self._app = app
         self._pinned = pinned
         self._running = running

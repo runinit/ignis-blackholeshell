@@ -10,8 +10,9 @@ print("[DOCK] Imported GLib", file=sys.stderr)
 from ignis import widgets
 print("[DOCK] Imported widgets", file=sys.stderr)
 
-from ignis.services.applications import ApplicationsService
-print("[DOCK] Imported ApplicationsService", file=sys.stderr)
+# Defer ApplicationsService import - it's expensive (scans desktop files)
+# Import moved to get_apps_service() function below
+print("[DOCK] Skipping ApplicationsService import (deferred)", file=sys.stderr)
 
 from .dock_item import DockItem
 print("[DOCK] Imported DockItem", file=sys.stderr)
@@ -20,17 +21,22 @@ from user_options import user_options
 print("[DOCK] Imported user_options", file=sys.stderr)
 
 
-# Lazy initialization - don't initialize services at import time
+# Lazy initialization - don't import or initialize services at module load time
 _apps_service = None
 
 def get_apps_service():
-    """Lazy load ApplicationsService"""
+    """Lazy load ApplicationsService (deferred import + initialization)"""
     global _apps_service
     if _apps_service is None:
-        print("[DOCK] Initializing ApplicationsService...", file=sys.stderr)
+        print("[DOCK] Importing ApplicationsService module...", file=sys.stderr)
+        from ignis.services.applications import ApplicationsService
+        print("[DOCK] ApplicationsService imported, initializing...", file=sys.stderr)
         _apps_service = ApplicationsService.get_default()
         print("[DOCK] ApplicationsService initialized", file=sys.stderr)
     return _apps_service
+
+
+print("[DOCK] Defining Dock class...", file=sys.stderr)
 
 
 class Dock(widgets.Window):
