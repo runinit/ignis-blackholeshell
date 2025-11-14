@@ -1,0 +1,67 @@
+// Dock Styling (Phase 2)
+// Using Blackhole design tokens for consistent styling
+
+.dock {
+    // Base styling
+    background: $surface-container;
+    border-radius: $radius-l;
+    padding: $spacing-s;
+    box-shadow: $shadow-elevation-3;
+
+    // Bottom position (default)
+    &.position-bottom {
+        margin: 0 $spacing-m $spacing-m $spacing-m;
+    }
+
+    // Left position (vertical)
+    &.position-left {
+        margin: $spacing-m 0 $spacing-m $spacing-m;
+    }
+
+    // Right position (vertical)
+    &.position-right {
+        margin: $spacing-m $spacing-m $spacing-m 0;
+    }
+}
+
+.dock-container {
+    gap: $spacing-xs;
+}
+
+.dock-item {
+    all: unset;
+    border-radius: $radius-m;
+    padding: $spacing-xs;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-high;
+        transform: scale(1.1);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+
+    &.running {
+        opacity: 1.0;
+    }
+
+    &.inactive {
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .active-indicator {
+        height: 2px;
+        width: 24px;
+        background: $primary;
+        border-radius: 2px;
+        margin-top: $spacing-xxs;
+        align-self: center;
+    }
+}

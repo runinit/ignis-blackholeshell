@@ -19,6 +19,7 @@ from modules import (
     Settings,
     WallpaperPicker,
 )
+from modules.dock import Dock
 from ignis.css_manager import CssManager, CssInfoPath
 from ignis.icon_manager import IconManager
 from user_options import user_options
@@ -125,6 +126,11 @@ ControlCenter()
 
 for monitor in range(utils.get_n_monitors()):
     Bar(monitor)
+
+# Initialize dock (Phase 2)
+if user_options.dock.enabled:
+    for monitor in range(utils.get_n_monitors()):
+        Dock(monitor)
 
 for monitor in range(utils.get_n_monitors()):
     NotificationPopup(monitor)
