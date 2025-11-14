@@ -6,9 +6,6 @@ venv_path = os.path.join(os.path.dirname(__file__), ".venv", "lib", "python3.13"
 if os.path.exists(venv_path):
     sys.path.insert(0, venv_path)
 
-# Enable widget parent debugging
-import debug_widget_parent
-
 from ignis import utils
 from ignis.services.wallpaper import WallpaperService
 from services.wallpaper_slideshow import WallpaperSlideshowService

@@ -45,11 +45,14 @@ class Dock(widgets.Window):
         # Wrap dock_box in EventBox for hover detection (auto-hide)
         dock_child = self._dock_box
         if self._auto_hide_enabled and enabled:
-            dock_child = widgets.EventBox(
+            # Don't pass child in constructor to avoid re-parenting issues
+            # EventBox inherits from Box and treats Box children as iterable
+            event_box = widgets.EventBox(
                 on_hover=lambda x: self._on_dock_enter(),
                 on_hover_lost=lambda x: self._on_dock_leave(),
-                child=self._dock_box,
             )
+            event_box.append(self._dock_box)
+            dock_child = event_box
 
         super().__init__(
             namespace=f"ignis_DOCK_{monitor}",
