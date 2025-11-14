@@ -294,3 +294,218 @@
         color: $on-surface-variant;
     }
 }
+
+// ========================================
+// Panel Styles (Phase 3, Tasks 4-7)
+// ========================================
+
+// Calendar Panel (Task 4)
+.calendar-widget {
+    padding: $spacing-m;
+    background: $surface-container;
+    border-radius: $radius-m;
+}
+
+.calendar-events-section {
+    margin-top: $spacing-m;
+    padding: $spacing-s;
+}
+
+.calendar-events-title {
+    font-size: $font-size-l;
+    font-weight: 600;
+    color: $on-surface;
+    margin-bottom: $spacing-s;
+}
+
+.calendar-events-list {
+    gap: $spacing-xs;
+}
+
+.calendar-event-item {
+    background: $surface-container-high;
+    border-radius: $radius-s;
+    padding: $spacing-s $spacing-m;
+    transition: all $animation-fast ease;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.calendar-event-title {
+    font-size: $font-size-m;
+    color: $on-surface;
+    font-weight: 500;
+}
+
+.calendar-event-time {
+    font-size: $font-size-s;
+    color: $on-surface-variant;
+    margin-top: $spacing-xxs;
+}
+
+// Audio Panel (Task 5)
+.audio-devices-section {
+    margin-bottom: $spacing-m;
+}
+
+.audio-section-title,
+.bluetooth-section-title,
+.network-section-title {
+    font-size: $font-size-l;
+    font-weight: 600;
+    color: $on-surface;
+    margin-bottom: $spacing-s;
+}
+
+.audio-devices-list {
+    gap: $spacing-xs;
+}
+
+.audio-device-row {
+    background: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-s $spacing-m;
+    gap: $spacing-m;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.audio-device-name {
+    font-size: $font-size-m;
+    color: $on-surface;
+    font-weight: 500;
+}
+
+.audio-device-info {
+    font-size: $font-size-s;
+    color: $on-surface-variant;
+    margin-top: $spacing-xxs;
+}
+
+.audio-device-selected {
+    color: $primary;
+}
+
+// Network Panel (Task 6)
+.network-connected-section {
+    margin-bottom: $spacing-m;
+}
+
+.network-connected-box {
+    background: $primary-container;
+    border-radius: $radius-m;
+    padding: $spacing-m;
+    gap: $spacing-m;
+}
+
+.network-connected-name {
+    font-size: $font-size-l;
+    color: $on-primary-container;
+    font-weight: 600;
+}
+
+.network-connected-info {
+    font-size: $font-size-s;
+    color: $on-primary-container;
+    opacity: $opacity-medium;
+    margin-top: $spacing-xxs;
+}
+
+.network-available-section {
+    margin-top: $spacing-m;
+}
+
+.network-list {
+    gap: $spacing-xs;
+}
+
+.network-row {
+    all: unset;
+    background: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-s $spacing-m;
+    display: flex;
+    gap: $spacing-m;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.network-name {
+    font-size: $font-size-m;
+    color: $on-surface;
+}
+
+.network-connected {
+    color: $primary;
+}
+
+.network-secure {
+    color: $on-surface-variant;
+    opacity: $opacity-medium;
+}
+
+.network-no-device {
+    font-size: $font-size-m;
+    color: $on-surface-variant;
+    padding: $spacing-l;
+    text-align: center;
+}
+
+.network-toggle,
+.bluetooth-toggle {
+    margin-left: $spacing-s;
+}
+
+// Bluetooth Panel (Task 7)
+.bluetooth-devices-section {
+    margin-bottom: $spacing-m;
+}
+
+.bluetooth-devices-list {
+    gap: $spacing-xs;
+}
+
+.bluetooth-device-row {
+    all: unset;
+    background: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-s $spacing-m;
+    display: flex;
+    gap: $spacing-m;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.bluetooth-device-name {
+    font-size: $font-size-m;
+    color: $on-surface;
+    font-weight: 500;
+}
+
+.bluetooth-device-status {
+    font-size: $font-size-s;
+    color: $on-surface-variant;
+    margin-top: $spacing-xxs;
+}
+
+.bluetooth-device-connected {
+    color: $primary;
+}
