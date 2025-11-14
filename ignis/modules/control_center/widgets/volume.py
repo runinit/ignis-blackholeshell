@@ -5,6 +5,7 @@ from ignis.services.audio import AudioService, Stream
 from typing import Literal
 from ..menu import Menu
 from ...shared_widgets import MaterialVolumeSlider
+from gi.repository import GLib
 
 # Lazy initialization - don't initialize services at import time
 _audio = None
@@ -76,9 +77,11 @@ class DeviceMenu(Menu):
                 ),
                 widgets.Box(
                     vertical=True,
-                    setup=lambda self: audio.connect(
-                        f"{_type}-added",
-                        lambda x, stream: self.append(DeviceItem(stream, _type)),
+                    setup=lambda self: GLib.idle_add(
+                        lambda: audio.connect(
+                            f"{_type}-added",
+                            lambda x, stream: self.append(DeviceItem(stream, _type)),
+                        )
                     ),
                 ),
                 widgets.Separator(css_classes=["volume-entry-list-separator"]),
@@ -130,6 +133,7 @@ class VolumeSlider(widgets.Box):
             css_classes=["material-slider-arrow", "hover-surface"],
             on_click=lambda x: device_menu.toggle(),
         )
+
         super().__init__(
             vertical=True,
             child=[
