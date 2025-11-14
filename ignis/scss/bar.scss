@@ -12,7 +12,6 @@
         &.floating {
             border-radius: $radius-l;
             box-shadow: $shadow-elevation-2;
-            backdrop-filter: blur(10px);
             background: rgba($surface-container, 0.95);
         }
         &:not(.floating) {
@@ -26,7 +25,6 @@
         &.floating {
             border-radius: $radius-l;
             box-shadow: $shadow-elevation-2;
-            backdrop-filter: blur(10px);
             background: rgba($surface-container, 0.95);
         }
         &:not(.floating) {
@@ -40,7 +38,6 @@
         &.floating {
             border-radius: $radius-l;
             box-shadow: $shadow-elevation-2;
-            backdrop-filter: blur(10px);
             background: rgba($surface-container, 0.95);
         }
         &:not(.floating) {
@@ -54,7 +51,6 @@
         &.floating {
             border-radius: $radius-l;
             box-shadow: $shadow-elevation-2;
-            backdrop-filter: blur(10px);
             background: rgba($surface-container, 0.95);
         }
         &:not(.floating) {

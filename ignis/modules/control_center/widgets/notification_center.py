@@ -53,8 +53,21 @@ class NotificationList(widgets.Box):
 
         utils.ThreadTask(
             self.__load_notifications,
-            lambda result: self.set_child(result),
+            lambda result: self.__set_notifications(result),
         ).run()
+
+    def __set_notifications(self, widgets_list):
+        """Set notification widgets from list - runs in main thread."""
+        # Remove all existing children
+        child = self.get_first_child()
+        while child:
+            next_child = child.get_next_sibling()
+            self.remove(child)
+            child = next_child
+
+        # Add notification widgets
+        for widget in widgets_list:
+            self.append(widget)
 
     def __on_notified(self, notification: Notification) -> None:
         notify = Popup(notification)
@@ -62,11 +75,15 @@ class NotificationList(widgets.Box):
         notify.reveal_child = True
 
     def __load_notifications(self) -> list[widgets.Label | Popup]:
+        """Load notifications in background thread (widget creation is safe)."""
         notifications = get_notifications()
         contents: list[widgets.Label | Popup] = []
-        for i in notifications.notifications:
-            GLib.idle_add(lambda i=i: contents.append(Popup(i, reveal_child=True)))
 
+        # Create notification widgets (safe to create in background, just not modify tree)
+        for notification in notifications.notifications:
+            contents.append(Popup(notification, reveal_child=True))
+
+        # Add "No notifications" label
         contents.append(
             widgets.Label(
                 label="No notifications",

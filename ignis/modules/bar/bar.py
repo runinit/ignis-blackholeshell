@@ -42,6 +42,7 @@ class Bar(widgets.Window):
             namespace=f"ignis_BAR_{monitor}",
             layer="top",
             kb_mode="none",
+            visible=True,
             margin_top=margin if position == "top" else 0,
             margin_bottom=margin if position == "bottom" else 0,
             margin_left=margin if position == "left" else 0,

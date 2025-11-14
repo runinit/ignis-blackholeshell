@@ -36,11 +36,12 @@ class BrightnessOSD(OSDWindow):
             css_classes=["osd-icon"],
         )
 
-        self._progress = widgets.LevelBar(
-            min_value=0,
-            max_value=100,
+        self._progress = widgets.Scale(
+            min=0,
+            max=100,
             value=self._get_brightness_value(),
             css_classes=["osd-progress"],
+            sensitive=False,  # Make read-only for display
         )
 
         self._label = widgets.Label(
@@ -48,17 +49,17 @@ class BrightnessOSD(OSDWindow):
             css_classes=["osd-label"],
         )
 
-        # Set child
-        self.child = widgets.Box(
+        # Set child - create box first, then append children to avoid parent conflicts
+        container = widgets.Box(
             orientation="vertical",
             spacing=12,
             css_classes=["osd-container"],
-            child=[
-                self._icon,
-                self._progress,
-                self._label,
-            ],
         )
+        container.append(self._icon)
+        container.append(self._progress)
+        container.append(self._label)
+
+        self.child = container
 
         # Connect to backlight service signal
         self._backlight.connect("notify::brightness", lambda *_: self._on_brightness_changed())

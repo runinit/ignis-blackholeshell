@@ -5,8 +5,9 @@ Provides modern OSD windows for volume, brightness, and other system notificatio
 with Noctalia-inspired design and smooth animations.
 """
 
+from .osd import OSD
 from .osd_window import OSDWindow
 from .volume_osd import VolumeOSD
 from .brightness_osd import BrightnessOSD
 
-__all__ = ["OSDWindow", "VolumeOSD", "BrightnessOSD"]
+__all__ = ["OSD", "OSDWindow", "VolumeOSD", "BrightnessOSD"]

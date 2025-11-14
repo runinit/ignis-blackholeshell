@@ -9,7 +9,7 @@ from ignis.services.applications import (
 )
 from ignis import utils
 from ignis.menu_model import IgnisMenuModel, IgnisMenuItem, IgnisMenuSeparator
-from gi.repository import Gio  # type: ignore
+from gi.repository import Gio, GioUnix  # type: ignore
 
 window_manager = WindowManager.get_default()
 
@@ -95,7 +95,7 @@ class SearchWebButton(widgets.Button):
             "xdg-settings get default-web-browser"
         ).stdout.replace("\n", "")
 
-        app_info = Gio.DesktopAppInfo.new(desktop_id=browser_desktop_file)
+        app_info = GioUnix.DesktopAppInfo.new(desktop_id=browser_desktop_file)
 
         icon_name = "applications-internet-symbolic"
         if app_info:
