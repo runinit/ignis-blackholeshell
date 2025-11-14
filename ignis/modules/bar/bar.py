@@ -72,10 +72,10 @@ class Bar(widgets.Window):
                 css_classes=["bar-widget"],
                 child=[
                     widgets.Box(child=[Workspaces()], valign="start"),
-                    widgets.Box(child=[], valign="center", vexpand=True),  # Apps() temporarily disabled for testing
+                    widgets.Box(child=[Apps()], valign="center", vexpand=True),
                     widgets.Box(
                         orientation="vertical",
-                        child=[KeyboardLayout(), Battery(), StatusPill(monitor)],  # Tray() temporarily disabled for testing
+                        child=[Tray(), KeyboardLayout(), Battery(), StatusPill(monitor)],
                         valign="end",
                     ),
                 ],
@@ -85,8 +85,8 @@ class Bar(widgets.Window):
             return widgets.CenterBox(
                 css_classes=["bar-widget"],
                 start_widget=widgets.Box(child=[Workspaces()]),
-                center_widget=widgets.Box(child=[]),  # Apps() temporarily disabled for testing
+                center_widget=widgets.Box(child=[Apps()]),
                 end_widget=widgets.Box(
-                    child=[KeyboardLayout(), Battery(), StatusPill(monitor)]  # Tray() temporarily disabled for testing
+                    child=[Tray(), KeyboardLayout(), Battery(), StatusPill(monitor)]
                 ),
             )
