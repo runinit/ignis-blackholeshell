@@ -1,174 +1,511 @@
+// Control Center Styling (Phase 3, Task 1)
+// Using Blackhole design tokens for Noctalia aesthetics
+
 .control-center {
-    @include window;
-    min-width: 28rem;
-    padding: 0;
+    background: rgba($surface-container, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: $radius-l 0 0 $radius-l;
+    padding: $spacing-m;
+    box-shadow: $shadow-elevation-4;
+    min-width: 400px;
+    max-width: 400px;
+}
 
-    .control-center-widget {
-        padding: 1rem;
-        margin-bottom: 1rem;
-    }
-    
-    .qs-main-box {
-        margin-top: 0.5rem;
-    }
-    
-    .user {
-        margin-top: 1rem;
-    }
-    
-    .qs-button {
-        @include hover($surfaceContainerHigh);
-        color: $onSurface;
-        min-height: 2.4rem;
-        border-radius: 1.2rem;
-        transition: 0.3s;
-        padding: 0.3rem 0.8rem;
-    
-        &.active {
-            @include hover($primary);
-            color: $surface;
-        }
-    
-    }
-    
-    .qs-button-label {
-        margin-left: 0.5rem;
-    }
-    
-    .control-center-menu {
-        background-color: $surfaceContainerHigh;
-        border-radius: 1rem;
-        padding: 1rem;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-    
-        separator {
-            margin: 0.5rem 0;
-        }
+.control-center-container {
+    gap: $spacing-m;
+}
 
-    }
-    .control-center-menu-last-row {
-        margin-bottom: 0;
-    }
-    
-    .record-icon {
-        color: $error;
-    }
-    
-    .record-dropdown {
-        button {
-            all: unset;
-            color: $onSurfaceVariant;
-            font-size: 0.9rem;
-        }
-    }
-    
-    .record-cancel-button,
-    .record-start-button {
-        color: $surface;
-        border-radius: 1rem;
-        padding: 0.25rem 0.75rem;
-        font-size: 0.95rem;
-        transition: 0.3s;
-    }
-    
-    .record-cancel-button {
-        @include hover($surfaceContainerHigh);
-        color: $onSurface;
-        border: 1px solid $primary;
-    }
-    
-    .record-start-button {
-        @include hover($primary);
-    }
-    
-    .volume-entry {
-        @include hover($surfaceContainerHigh);
-        transition: 0.3s;
-        border-radius: 1rem;
-        padding: 0.5rem 0.5rem;
-    }
-    
-    .volume-entry-list-header-label {
-        font-size: 1.35rem;
-        margin-left: 0.5rem;
-    }
-    
-    .volume-entry-list-header-box {
-        margin-bottom: 0.75rem;
-    }
-    
-    .user-name-box {
-        margin-left: 0.5rem;
-    }
-    
-    .user-name {
-        font-size: 1.2rem;
-    }
-    
-    .user-name-secondary {
-        color: $onSurfaceVariant;
-        font-size: 0.9rem;
-    }
-    
-    .user-settings {
-        @include hover($surfaceContainerHighest);
-        color: $onSurface;
-        border-radius: 2rem;
-        min-width: 2.35rem;
-        margin: 0.4rem 0rem;
-        margin-right: 0.5rem;
-        transition: 0.3s;
-    }
-    
-    .user-power {
-        @include hover($primary);
-        color: $surface;
-        border-radius: 1.5rem;
-        min-width: 2.35rem;
-        margin: 0.4rem 0rem;
-        transition: 0.3s;
-    }
-    
-    .network-header-box {
-        margin-bottom: 0.5rem;
-    }
-    
-    .network-header-label {
-        font-size: 1.35rem;
-        margin-left: 0.75rem;
-    }
-    
-    .network-item {
-        @include hover($surfaceContainerHigh);
-        transition: 0.3s;
-        border-radius: 1rem;
-        padding: 0.5rem 0.5rem;
+.control-center-header {
+    padding: $spacing-s;
+}
 
-        label {
-            margin-left: 0.5rem;
-        }
+.control-center-quick-settings {
+    gap: $spacing-s;
+}
 
-        .connect-label {
-            font-size: 1rem;
-            color: $onSurfaceVariant;
+// Panel Navigation System (Phase 3, Task 2)
+.panel-container {
+    transition: all $animation-normal ease;
+}
+
+.panel {
+    animation: slideIn $animation-normal ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.panel-header {
+    padding: $spacing-s $spacing-m;
+    margin-bottom: $spacing-m;
+    display: flex;
+    align-items: center;
+    gap: $spacing-s;
+}
+
+.panel-back-button {
+    all: unset;
+    background: $surface-container-high;
+    color: $on-surface;
+    border-radius: $radius-full;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    font-size: $font-size-l;
+    transition: all $animation-fast ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.05);
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.panel-title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $on-surface;
+}
+
+// Legacy widget padding (keep for compatibility)
+.control-center-widget {
+    padding: $spacing-m;
+    margin-bottom: $spacing-m;
+}
+
+.qs-main-box {
+    margin-top: $spacing-s;
+}
+
+.user {
+    // No extra margin needed in new header layout
+}
+    
+// Quick Settings Button
+.qs-button {
+    background: $surface-container-high;
+    color: $on-surface;
+    min-height: 2.4rem;
+    border-radius: $radius-m;
+    transition: all $animation-fast ease;
+    padding: $spacing-xs $spacing-s;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.02);
+    }
+
+    &.active {
+        background: $primary-container;
+        color: $on-primary-container;
+
+        &:hover {
+            background: $primary;
+            color: $on-primary;
         }
     }
+}
+
+.qs-button-label {
+    margin-left: $spacing-s;
+}
     
-    .volume-entry-label {
-        margin-left: 0.5rem;
-        margin-right: 1rem;
+// Control Center Menu (WiFi, Bluetooth panels)
+.control-center-menu {
+    background-color: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-m;
+    margin-top: $spacing-m;
+    margin-bottom: $spacing-s;
+
+    separator {
+        margin: $spacing-s 0;
+    }
+}
+
+.control-center-menu-last-row {
+    margin-bottom: 0;
+}
+
+// Recording controls
+.record-icon {
+    color: $error;
+}
+
+.record-dropdown {
+    button {
+        all: unset;
+        color: $on-surface-variant;
+        font-size: $font-size-s;
+    }
+}
+
+.record-cancel-button,
+.record-start-button {
+    color: $on-primary;
+    border-radius: $radius-m;
+    padding: $spacing-xs $spacing-s;
+    font-size: $font-size-m;
+    transition: all $animation-fast ease;
+}
+
+.record-cancel-button {
+    background: $surface-container-high;
+    color: $on-surface;
+    border: 1px solid $primary;
+
+    &:hover {
+        background: $surface-container-highest;
+    }
+}
+
+.record-start-button {
+    background: $primary;
+    color: $on-primary;
+
+    &:hover {
+        background: $primary-container;
+        color: $on-primary-container;
+    }
+}
+    
+// Volume controls
+.volume-entry {
+    background: $surface-container;
+    transition: all $animation-fast ease;
+    border-radius: $radius-m;
+    padding: $spacing-s;
+
+    &:hover {
+        background: $surface-container-high;
+    }
+}
+
+.volume-entry-list-header-label {
+    font-size: $font-size-l;
+    margin-left: $spacing-s;
+}
+
+.volume-entry-list-header-box {
+    margin-bottom: $spacing-m;
+}
+
+.volume-entry-label {
+    margin-left: $spacing-s;
+    margin-right: $spacing-m;
+}
+
+.volume-mainbox-speaker {
+    margin-top: $spacing-m;
+}
+
+.volume-mainbox-microphone {
+    margin-top: $spacing-xs;
+}
+
+.volume-menubox-speaker {
+    margin-bottom: $spacing-m;
+}
+
+// User widget
+.user-name-box {
+    margin-left: $spacing-s;
+}
+
+.user-name {
+    font-size: $font-size-l;
+}
+
+.user-name-secondary {
+    color: $on-surface-variant;
+    font-size: $font-size-s;
+}
+
+.user-settings {
+    background: $surface-container;
+    color: $on-surface;
+    border-radius: $radius-full;
+    min-width: 2.35rem;
+    margin: $spacing-xs 0;
+    margin-right: $spacing-s;
+    transition: all $animation-fast ease;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.05);
+    }
+}
+
+.user-power {
+    background: $primary;
+    color: $on-primary;
+    border-radius: $radius-full;
+    min-width: 2.35rem;
+    margin: $spacing-xs 0;
+    transition: all $animation-fast ease;
+
+    &:hover {
+        background: $primary-container;
+        color: $on-primary-container;
+        transform: scale(1.05);
+    }
+}
+    
+// Network widgets (WiFi, Ethernet)
+.network-header-box {
+    margin-bottom: $spacing-s;
+}
+
+.network-header-label {
+    font-size: $font-size-l;
+    margin-left: $spacing-m;
+}
+
+.network-item {
+    background: $surface-container;
+    transition: all $animation-fast ease;
+    border-radius: $radius-m;
+    padding: $spacing-s;
+
+    &:hover {
+        background: $surface-container-high;
+        transform: scale(1.01);
     }
 
-    .volume-mainbox-speaker {
-        margin-top: 1rem;
+    label {
+        margin-left: $spacing-s;
     }
 
-    .volume-mainbox-microphone {
-        margin-top: 0.25rem;
+    .connect-label {
+        font-size: $font-size-m;
+        color: $on-surface-variant;
     }
+}
 
-    .volume-menubox-speaker {
-        margin-bottom: 0.75rem;
+// ========================================
+// Panel Styles (Phase 3, Tasks 4-7)
+// ========================================
+
+// Calendar Panel (Task 4)
+.calendar-widget {
+    padding: $spacing-m;
+    background: $surface-container;
+    border-radius: $radius-m;
+}
+
+.calendar-events-section {
+    margin-top: $spacing-m;
+    padding: $spacing-s;
+}
+
+.calendar-events-title {
+    font-size: $font-size-l;
+    font-weight: 600;
+    color: $on-surface;
+    margin-bottom: $spacing-s;
+}
+
+.calendar-events-list {
+    gap: $spacing-xs;
+}
+
+.calendar-event-item {
+    background: $surface-container-high;
+    border-radius: $radius-s;
+    padding: $spacing-s $spacing-m;
+    transition: all $animation-fast ease;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
     }
+}
+
+.calendar-event-title {
+    font-size: $font-size-m;
+    color: $on-surface;
+    font-weight: 500;
+}
+
+.calendar-event-time {
+    font-size: $font-size-s;
+    color: $on-surface-variant;
+    margin-top: $spacing-xxs;
+}
+
+// Audio Panel (Task 5)
+.audio-devices-section {
+    margin-bottom: $spacing-m;
+}
+
+.audio-section-title,
+.bluetooth-section-title,
+.network-section-title {
+    font-size: $font-size-l;
+    font-weight: 600;
+    color: $on-surface;
+    margin-bottom: $spacing-s;
+}
+
+.audio-devices-list {
+    gap: $spacing-xs;
+}
+
+.audio-device-row {
+    background: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-s $spacing-m;
+    gap: $spacing-m;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.audio-device-name {
+    font-size: $font-size-m;
+    color: $on-surface;
+    font-weight: 500;
+}
+
+.audio-device-info {
+    font-size: $font-size-s;
+    color: $on-surface-variant;
+    margin-top: $spacing-xxs;
+}
+
+.audio-device-selected {
+    color: $primary;
+}
+
+// Network Panel (Task 6)
+.network-connected-section {
+    margin-bottom: $spacing-m;
+}
+
+.network-connected-box {
+    background: $primary-container;
+    border-radius: $radius-m;
+    padding: $spacing-m;
+    gap: $spacing-m;
+}
+
+.network-connected-name {
+    font-size: $font-size-l;
+    color: $on-primary-container;
+    font-weight: 600;
+}
+
+.network-connected-info {
+    font-size: $font-size-s;
+    color: $on-primary-container;
+    opacity: $opacity-medium;
+    margin-top: $spacing-xxs;
+}
+
+.network-available-section {
+    margin-top: $spacing-m;
+}
+
+.network-list {
+    gap: $spacing-xs;
+}
+
+.network-row {
+    all: unset;
+    background: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-s $spacing-m;
+    display: flex;
+    gap: $spacing-m;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.network-name {
+    font-size: $font-size-m;
+    color: $on-surface;
+}
+
+.network-connected {
+    color: $primary;
+}
+
+.network-secure {
+    color: $on-surface-variant;
+    opacity: $opacity-medium;
+}
+
+.network-no-device {
+    font-size: $font-size-m;
+    color: $on-surface-variant;
+    padding: $spacing-l;
+    text-align: center;
+}
+
+.network-toggle,
+.bluetooth-toggle {
+    margin-left: $spacing-s;
+}
+
+// Bluetooth Panel (Task 7)
+.bluetooth-devices-section {
+    margin-bottom: $spacing-m;
+}
+
+.bluetooth-devices-list {
+    gap: $spacing-xs;
+}
+
+.bluetooth-device-row {
+    all: unset;
+    background: $surface-container-high;
+    border-radius: $radius-m;
+    padding: $spacing-s $spacing-m;
+    display: flex;
+    gap: $spacing-m;
+    transition: all $animation-fast ease;
+    cursor: pointer;
+
+    &:hover {
+        background: $surface-container-highest;
+        transform: scale(1.01);
+    }
+}
+
+.bluetooth-device-name {
+    font-size: $font-size-m;
+    color: $on-surface;
+    font-weight: 500;
+}
+
+.bluetooth-device-status {
+    font-size: $font-size-s;
+    color: $on-surface-variant;
+    margin-top: $spacing-xxs;
+}
+
+.bluetooth-device-connected {
+    color: $primary;
 }

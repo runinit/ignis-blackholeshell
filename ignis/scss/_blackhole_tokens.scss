@@ -1,0 +1,263 @@
+/**
+ * Blackhole Shell Design Tokens
+ * Based on Noctalia Shell design system
+ *
+ * Reference: https://github.com/noctalia-dev/noctalia-shell
+ * Adapted for Ignis Blackhole Shell with GTK4/SCSS implementation
+ */
+
+// ============================================================
+// CONFIGURATION RATIOS
+// ============================================================
+
+// User-configurable scaling ratios (can be overridden)
+$ui-scale-ratio: 1.0 !default;
+$radius-ratio: 1.0 !default;
+$screen-radius-ratio: 1.0 !default;
+
+// ============================================================
+// TYPOGRAPHY
+// ============================================================
+
+// Font sizes (8-level scale)
+$font-size-xxs: 8px;
+$font-size-xs: 9px;
+$font-size-s: 10px;
+$font-size-m: 11px;     // Default body text
+$font-size-l: 13px;
+$font-size-xl: 16px;
+$font-size-xxl: 18px;
+$font-size-xxxl: 24px;
+
+// Font weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ============================================================
+// SPACING
+// ============================================================
+
+// Spacing scale with UI ratio support
+$spacing-xxs: calc(2px * #{$ui-scale-ratio});
+$spacing-xs: calc(4px * #{$ui-scale-ratio});
+$spacing-s: calc(6px * #{$ui-scale-ratio});
+$spacing-m: calc(9px * #{$ui-scale-ratio});
+$spacing-l: calc(13px * #{$ui-scale-ratio});
+$spacing-xl: calc(18px * #{$ui-scale-ratio});
+
+// ============================================================
+// BORDER RADIUS
+// ============================================================
+
+// Border radius scale with ratio support
+$radius-xxs: calc(4px * #{$radius-ratio});
+$radius-xs: calc(8px * #{$radius-ratio});
+$radius-s: calc(12px * #{$radius-ratio});
+$radius-m: calc(16px * #{$radius-ratio});
+$radius-l: calc(20px * #{$radius-ratio});
+$radius-screen: calc(20px * #{$screen-radius-ratio});
+
+// ============================================================
+// BORDERS
+// ============================================================
+
+// Border widths with UI scaling
+$border-s: max(1px, calc(1px * #{$ui-scale-ratio}));
+$border-m: max(1px, calc(2px * #{$ui-scale-ratio}));
+$border-l: max(1px, calc(3px * #{$ui-scale-ratio}));
+
+// ============================================================
+// OPACITY
+// ============================================================
+
+// Standardized opacity levels
+$opacity-none: 0.0;
+$opacity-light: 0.25;
+$opacity-medium: 0.5;
+$opacity-heavy: 0.75;
+$opacity-almost: 0.95;
+$opacity-full: 1.0;
+
+// ============================================================
+// SHADOWS
+// ============================================================
+
+// Shadow configuration
+$shadow-opacity: 0.85;
+$shadow-blur-max: 22px;
+$shadow-offset-x: 0px;
+$shadow-offset-y: 2px;
+
+// Standard shadow (for panels, cards)
+$shadow-standard: $shadow-offset-x $shadow-offset-y $shadow-blur-max rgba(0, 0, 0, $shadow-opacity);
+
+// Light shadow (for subtle elevation)
+$shadow-light: 0 1px 3px rgba(0, 0, 0, 0.12);
+
+// Medium shadow (for dropdowns, tooltips)
+$shadow-medium: 0 2px 6px rgba(0, 0, 0, 0.16);
+
+// Heavy shadow (for modals)
+$shadow-heavy: 0 4px 12px rgba(0, 0, 0, 0.20);
+
+// ============================================================
+// ANIMATIONS
+// ============================================================
+
+// Animation durations
+$animation-faster: 75ms;
+$animation-fast: 150ms;
+$animation-normal: 300ms;
+$animation-slow: 450ms;
+$animation-slowest: 750ms;
+
+// Animation delays
+$delay-tooltip: 300ms;
+$delay-tooltip-long: 1200ms;
+$delay-pill: 500ms;
+
+// Easing functions
+$ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+$ease-in-cubic: cubic-bezier(0.32, 0, 0.67, 0);
+$ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+
+// ============================================================
+// COMPONENT DIMENSIONS
+// ============================================================
+
+// Base widget size
+$widget-size-base: 33px;
+
+// Slider dimensions
+$slider-width: 200px;
+
+// Bar height (density-dependent)
+$bar-height-compact: 20px;
+$bar-height-comfortable: 30px;
+$bar-height-spacious: 39px;
+
+// ============================================================
+// COLOR TOKENS (Material Design 3)
+// ============================================================
+// Colors are injected dynamically from color scheme service
+// These are placeholder declarations with Rose Pine defaults
+
+// Primary colors
+$primary: #c4a7e7 !default;
+$on-primary: #191724 !default;
+$primary-container: #524f67 !default;
+$on-primary-container: #e0def4 !default;
+
+// Secondary colors
+$secondary: #9ccfd8 !default;
+$on-secondary: #191724 !default;
+$secondary-container: #403d52 !default;
+$on-secondary-container: #e0def4 !default;
+
+// Tertiary colors
+$tertiary: #ebbcba !default;
+$on-tertiary: #191724 !default;
+$tertiary-container: #403d52 !default;
+$on-tertiary-container: #e0def4 !default;
+
+// Error colors
+$error: #eb6f92 !default;
+$on-error: #191724 !default;
+$error-container: #403d52 !default;
+$on-error-container: #e0def4 !default;
+
+// Background colors
+$background: #191724 !default;
+$on-background: #e0def4 !default;
+
+// Surface colors
+$surface: #1f1d2e !default;
+$on-surface: #e0def4 !default;
+$surface-variant: #26233a !default;
+$on-surface-variant: #908caa !default;
+
+// Surface containers (elevation levels)
+$surface-dim: #191724 !default;
+$surface-bright: #403d52 !default;
+$surface-container-lowest: #191724 !default;
+$surface-container-low: #21202e !default;
+$surface-container: #26233a !default;
+$surface-container-high: #403d52 !default;
+$surface-container-highest: #524f67 !default;
+
+// Outline colors
+$outline: #6e6a86 !default;
+$outline-variant: #403d52 !default;
+
+// Other colors
+$shadow: #000000 !default;
+$scrim: #000000 !default;
+$inverse-surface: #e0def4 !default;
+$inverse-on-surface: #191724 !default;
+$inverse-primary: #6e6a86 !default;
+
+// ============================================================
+// UTILITY MIXINS
+// ============================================================
+
+// Standard card/panel styling
+@mixin card-base {
+    background-color: $surface-container;
+    border-radius: $radius-s;
+    box-shadow: $shadow-medium;
+    padding: $spacing-m;
+}
+
+// Floating element (with shadow)
+@mixin floating {
+    box-shadow: $shadow-heavy;
+    border-radius: $radius-m;
+}
+
+// Smooth transitions
+@mixin transition-standard($property: all) {
+    transition: $property $animation-normal $ease-in-out-cubic;
+}
+
+// Focus ring
+@mixin focus-ring {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+}
+
+// Text truncation
+@mixin text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// ============================================================
+// RESPONSIVE HELPERS
+// ============================================================
+
+// Standard breakpoints (for multi-monitor/window scaling)
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// ============================================================
+// Z-INDEX LAYERS
+// ============================================================
+
+// Z-index scale for layering
+$z-background: -1;
+$z-default: 0;
+$z-elevated: 10;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-overlay: 300;
+$z-modal: 400;
+$z-popover: 500;
+$z-tooltip: 600;
+$z-notification: 700;
+$z-maximum: 999;
