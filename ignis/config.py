@@ -1,12 +1,20 @@
 import os
 import sys
+import subprocess
 
 # Add venv to path for dependencies like materialyoucolor
 venv_path = os.path.join(os.path.dirname(__file__), ".venv", "lib", "python3.13", "site-packages")
 if os.path.exists(venv_path):
     sys.path.insert(0, venv_path)
 
+# Enable widget parent debugging
+import debug_widget_parent
+
 from ignis import utils
+
+def debug_log(msg):
+    """Helper to log debug messages."""
+    print(f"[CONFIG] {msg}", file=sys.stderr)
 from ignis.services.wallpaper import WallpaperService
 from services.wallpaper_slideshow import WallpaperSlideshowService
 from modules import (
@@ -28,12 +36,23 @@ icon_manager = IconManager.get_default()
 css_manager = CssManager.get_default()
 WallpaperService.get_default()
 
-# Initialize swww daemon for wallpaper transitions
+# Initialize swww daemon for wallpaper transitions (non-blocking)
 # Check if already running before starting
 try:
-    utils.exec_sh("pgrep -x swww-daemon > /dev/null || swww-daemon &")
-except:
-    pass  # Ignore errors, daemon might already be running
+    # Check if daemon is running (non-blocking check)
+    result = subprocess.run(["pgrep", "-x", "swww-daemon"],
+                          capture_output=True, timeout=1)
+    if result.returncode != 0:  # Not running, start it
+        debug_log("Starting swww-daemon...")
+        # Start daemon without blocking (Popen doesn't wait)
+        subprocess.Popen(["swww-daemon"],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        start_new_session=True)
+        debug_log("swww-daemon started in background")
+except Exception as e:
+    debug_log(f"swww-daemon check/start skipped: {e}")
+    pass  # Ignore errors, daemon might already be running or not needed
 
 # Initialize wallpaper slideshow service
 wallpaper_slideshow = WallpaperSlideshowService.get_default()
@@ -122,22 +141,60 @@ css_manager.apply_css(
 
 icon_manager.add_icons(os.path.join(utils.get_current_dir(), "icons"))
 
+debug_log("Creating ControlCenter...")
 ControlCenter()
+debug_log("ControlCenter created")
 
-for monitor in range(utils.get_n_monitors()):
+num_monitors = utils.get_n_monitors()
+debug_log(f"Number of monitors: {num_monitors}")
+
+for monitor in range(num_monitors):
+    debug_log(f"Creating Bar for monitor {monitor}...")
     Bar(monitor)
+    debug_log(f"Bar {monitor} created")
 
 # Initialize dock (Phase 2)
 if user_options.dock.enabled:
-    for monitor in range(utils.get_n_monitors()):
-        Dock(monitor)
+    debug_log(f"Dock enabled: {user_options.dock.enabled}, auto_hide: {user_options.dock.auto_hide}")
+    for monitor in range(num_monitors):
+        debug_log(f"Creating Dock for monitor {monitor}...")
+        try:
+            Dock(monitor)
+            debug_log(f"Dock {monitor} created")
+        except Exception as e:
+            debug_log(f"ERROR creating Dock {monitor}: {e}")
+            import traceback
+            traceback.print_exc()
+else:
+    debug_log("Dock disabled in user options")
 
-for monitor in range(utils.get_n_monitors()):
+for monitor in range(num_monitors):
+    debug_log(f"Creating NotificationPopup for monitor {monitor}...")
     NotificationPopup(monitor)
 
+debug_log("Creating Launcher...")
 Launcher()
+debug_log("Creating Powermenu...")
 Powermenu()
+debug_log("Creating OSD...")
 OSD()
 
+debug_log("Creating Settings...")
 Settings()
+debug_log("Creating WallpaperPicker...")
 WallpaperPicker()
+
+debug_log("All modules initialized successfully!")
+
+# Check window visibility
+from ignis.window_manager import WindowManager
+wm = WindowManager.get_default()
+debug_log(f"Checking window visibility...")
+for window_name in ["ignis_BAR_0", "ignis_CONTROL_CENTER", "ignis_DOCK_0", "ignis_LAUNCHER"]:
+    window = wm.get_window(window_name)
+    if window:
+        debug_log(f"  {window_name}: visible={window.visible}, monitor={getattr(window, 'monitor', 'N/A')}")
+    else:
+        debug_log(f"  {window_name}: NOT FOUND")
+
+debug_log("Initialization complete. Windows should be visible now.")

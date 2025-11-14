@@ -5,6 +5,7 @@ from ignis.services.audio import AudioService, Stream
 from typing import Literal
 from ..menu import Menu
 from ...shared_widgets import MaterialVolumeSlider
+from gi.repository import GLib
 
 # Lazy initialization - don't initialize services at import time
 _audio = None
@@ -60,6 +61,9 @@ class DeviceMenu(Menu):
         audio = get_audio()
         data = AUDIO_TYPES[_type]
 
+        # Create device list container without signal connection
+        self._device_list = widgets.Box(vertical=True)
+
         super().__init__(
             name=f"volume-{_type}",
             child=[
@@ -74,13 +78,7 @@ class DeviceMenu(Menu):
                     ],
                     css_classes=["volume-entry-list-header-box"],
                 ),
-                widgets.Box(
-                    vertical=True,
-                    setup=lambda self: audio.connect(
-                        f"{_type}-added",
-                        lambda x, stream: self.append(DeviceItem(stream, _type)),
-                    ),
-                ),
+                self._device_list,
                 widgets.Separator(css_classes=["volume-entry-list-separator"]),
                 widgets.Button(
                     child=widgets.Box(
@@ -101,6 +99,12 @@ class DeviceMenu(Menu):
         )
 
         self.box.add_css_class(f"volume-menubox-{_type}")
+
+        # Connect signal AFTER widget hierarchy is complete
+        audio.connect(
+            f"{_type}-added",
+            lambda x, stream: self._device_list.append(DeviceItem(stream, _type)),
+        )
 
 
 class VolumeSlider(widgets.Box):
@@ -130,6 +134,7 @@ class VolumeSlider(widgets.Box):
             css_classes=["material-slider-arrow", "hover-surface"],
             on_click=lambda x: device_menu.toggle(),
         )
+
         super().__init__(
             vertical=True,
             child=[

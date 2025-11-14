@@ -51,7 +51,6 @@ class LauncherAppItem(widgets.Button):
                         max_width_chars=30,
                         css_classes=["launcher-app-label"],
                     ),
-                    self._menu,
                 ]
             ),
         )

@@ -15,15 +15,26 @@ network = NetworkService.get_default()
 class QuickSettings(widgets.Box):
     def __init__(self):
         super().__init__(vertical=True, css_classes=["qs-main-box"])
+        self._refreshing = False
+
+        # Do initial refresh FIRST, then connect signals to avoid race conditions
+        self.__refresh()
+
+        # Connect signals after initial setup to prevent double-initialization
         network.wifi.connect("notify::devices", lambda x, y: self.__refresh())
         network.ethernet.connect("notify::devices", lambda x, y: self.__refresh())
         network.vpn.connect("notify::connections", lambda x, y: self.__refresh())
 
-        self.__refresh()
-
     def __refresh(self) -> None:
-        self.child = []
-        self.__configure()
+        # Prevent concurrent refreshes that could cause widget re-parenting issues
+        if self._refreshing:
+            return
+        self._refreshing = True
+        try:
+            self.child = []
+            self.__configure()
+        finally:
+            self._refreshing = False
 
     def __configure(self) -> None:
         self.__qs_fabric(
