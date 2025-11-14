@@ -140,7 +140,7 @@ class Dock(widgets.Window):
 
         return items
 
-    def _find_app(self, app_id: str) -> ApplicationsService | None:
+    def _find_app(self, app_id: str):
         """Find an application by ID or name."""
         apps_svc = get_apps_service()
         all_apps = apps_svc.apps
