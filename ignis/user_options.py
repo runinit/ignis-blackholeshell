@@ -164,6 +164,12 @@ class UserOptions(OptionsManager):
         position: str = "bottom"  # bottom/left/right
         size: float = 1.0  # Icon size multiplier (0.5-2.0)
         auto_hide: bool = True  # Auto-hide functionality
+
+        # Auto-hide Configuration (Phase 2, Task 4)
+        show_delay: int = 200  # Delay before showing dock (ms)
+        hide_delay: int = 500  # Delay before hiding dock (ms)
+        reveal_size: int = 1  # Trigger zone size at edge (pixels)
+
         pinned_apps: list[str] = [
             "firefox",
             "kitty",

@@ -227,6 +227,42 @@ class AppearanceEntry(SettingsEntry):
                             active=user_options.dock.bind("auto_hide"),
                             on_change=lambda x, state: user_options.dock.set_auto_hide(state),
                         ),
+                        SpinRow(
+                            label="Show Delay",
+                            sublabel="Milliseconds before showing dock",
+                            value=user_options.dock.bind("show_delay"),
+                            on_change=lambda x, value: user_options.dock.set_show_delay(
+                                int(value)
+                            ),
+                            min=0,
+                            max=2000,
+                            step=50,
+                            width=100,
+                        ),
+                        SpinRow(
+                            label="Hide Delay",
+                            sublabel="Milliseconds before hiding dock",
+                            value=user_options.dock.bind("hide_delay"),
+                            on_change=lambda x, value: user_options.dock.set_hide_delay(
+                                int(value)
+                            ),
+                            min=0,
+                            max=2000,
+                            step=50,
+                            width=100,
+                        ),
+                        SpinRow(
+                            label="Reveal Size",
+                            sublabel="Trigger zone size at screen edge (pixels)",
+                            value=user_options.dock.bind("reveal_size"),
+                            on_change=lambda x, value: user_options.dock.set_reveal_size(
+                                int(value)
+                            ),
+                            min=1,
+                            max=10,
+                            step=1,
+                            width=80,
+                        ),
                     ],
                 ),
             ],

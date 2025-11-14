@@ -7,21 +7,75 @@
     border-radius: $radius-l;
     padding: $spacing-s;
     box-shadow: $shadow-elevation-3;
+    transition: transform $animation-normal ease, opacity $animation-normal ease;
 
     // Bottom position (default)
     &.position-bottom {
         margin: 0 $spacing-m $spacing-m $spacing-m;
+
+        // Auto-hide animations for bottom position
+        &.hidden {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        &.showing {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        &.hiding {
+            transform: translateY(100%);
+            opacity: 0;
+        }
     }
 
     // Left position (vertical)
     &.position-left {
         margin: $spacing-m 0 $spacing-m $spacing-m;
+
+        // Auto-hide animations for left position
+        &.hidden {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        &.showing {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        &.hiding {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
     }
 
     // Right position (vertical)
     &.position-right {
         margin: $spacing-m $spacing-m $spacing-m 0;
+
+        // Auto-hide animations for right position
+        &.hidden {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        &.showing {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        &.hiding {
+            transform: translateX(100%);
+            opacity: 0;
+        }
     }
+}
+
+// Peek window styling (invisible trigger zone)
+.dock-peek {
+    background: transparent;
 }
 
 .dock-container {
