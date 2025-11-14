@@ -39,7 +39,7 @@ class Settings(widgets.RegularWindow):
             ],
         )
 
-        # Create GNOME 48-style HeaderBar with title and window controls
+        # Create Noctalia-style HeaderBar with title and window controls
         headerbar = widgets.HeaderBar(
             css_classes=["settings-headerbar"],
             show_title_buttons=True,
